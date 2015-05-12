@@ -3,7 +3,7 @@ import java.util.LinkedList;
 
 /**
  * Turns strings into LinkedLists
- * @author Jonathan
+ * @author Jonathan & Rickard
  *
  */
 
@@ -17,7 +17,7 @@ public class Parser {
 	 * @param key Key to use in encryption
 	 * @return String with encrypted text
 	 */
-	// anpassa för att skicka algoritmobjekt
+	// This is a kind of hacky version, change to make work with algorithm objects.
 	public String parseEncrypt(String in, String key) {
 		output = cae.encrypt(stringToList(in), Integer.parseInt(key));
 		StringBuilder sb = new StringBuilder();
