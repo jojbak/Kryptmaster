@@ -20,7 +20,7 @@ public class Parser {
 	 */
 	// This is a kind of hacky version, change to make work with algorithm objects.
 	public String parseEncrypt(String in, String key) {
-		output = cae.encrypt(stringToList(in), Integer.parseInt(key));
+		output = cae.encrypt(stringToList(in), key);
 		StringBuilder sb = new StringBuilder();
 		for(String word : output){
 			sb.append(word);
@@ -37,7 +37,7 @@ public class Parser {
 	 * @return String with decrypted text
 	 */
 	public String parseDecrypt(String in, String key) {
-		output = cae.decrypt(stringToList(in), Integer.parseInt(key));
+		output = cae.decrypt(stringToList(in), key);
 		StringBuilder sb = new StringBuilder();
 		for(String word : output){
 			sb.append(word);
