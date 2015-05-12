@@ -27,6 +27,8 @@ public class GUI {
 
 	private JFrame frame;
 	private JTextField txtKey;
+	Parser par = new Parser();
+
 
 	/**
 	 * Launch the application.
@@ -134,11 +136,8 @@ public class GUI {
 						algorithmsDropdown.getSelectedItem());
 				System.out.println(values);
 				
-				Parser par = new Parser();
 
 				if (values != false) {
-					// TODO
-					// kalla p� en metod som kirrar den krypterade texten
 					displayInTextArea(txtrTextAttDekryptera,
 							par.parseEncrypt(txtrTextAttKryptera.getText(), txtKey.getText()));
 				}
@@ -163,13 +162,12 @@ public class GUI {
 				boolean values = quickCryptionCheck(
 						txtrTextAttDekryptera.getText(), txtKey.getText(),
 						algorithmsDropdown.getSelectedItem());
-				System.out.println(values);
 
 				if (values != false) {
 					// TODO
 					// kalla p� en metod som kirrar den dekrypterade texten
 					displayInTextArea(txtrTextAttKryptera,
-							"Dekrypterad text osvosov");
+							par.parseDecrypt(txtrTextAttDekryptera.getText(), txtKey.getText()));
 				}
 
 			}
@@ -207,7 +205,6 @@ public class GUI {
 			public void mouseClicked(MouseEvent e) {
 				boolean values = fileCryptionCheck(txtKey.getText(),
 						algorithmsDropdown.getSelectedItem());
-				System.out.println(values);
 
 			}
 		});
