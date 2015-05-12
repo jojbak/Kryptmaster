@@ -61,8 +61,8 @@ public class GUI {
 		frame.getContentPane().setLayout(null);
 
 		/*
-		 * Innehåller den progressbaren som eventuellt kommer att implementars
-		 * Denna bar ska representera hur lång tid det tar att kryptera större
+		 * Innehï¿½ller den progressbaren som eventuellt kommer att implementars
+		 * Denna bar ska representera hur lï¿½ng tid det tar att kryptera stï¿½rre
 		 * textfiler
 		 */
 		JProgressBar progressBar = new JProgressBar();
@@ -70,10 +70,10 @@ public class GUI {
 		frame.getContentPane().add(progressBar);
 
 		/*
-		 * Textfältet som innehåller den nyckel som användare själv matar in.
-		 * Denna nyckel kan variera beroende på vilken algoritm det är och
-		 * representerar ungefär ett lösenord som gör att krypteringen blir
-		 * säkrare och personlig.
+		 * Textfï¿½ltet som innehï¿½ller den nyckel som anvï¿½ndare sjï¿½lv matar in.
+		 * Denna nyckel kan variera beroende pï¿½ vilken algoritm det ï¿½r och
+		 * representerar ungefï¿½r ett lï¿½senord som gï¿½r att krypteringen blir
+		 * sï¿½krare och personlig.
 		 */
 		txtKey = new JTextField();
 		txtKey.setText("Nyckel");
@@ -82,34 +82,34 @@ public class GUI {
 		txtKey.setColumns(10);
 
 		/*
-		 * Följande kodblock representerar den dropdown meny där användare ska
-		 * välja vilken krypteringsalgoritm som ska väljas. Ska typ
-		 * implementeras så att den bara kallar på en metod som returnerar nån
-		 * typ av lista där alla algortmer är representerade.
+		 * Fï¿½ljande kodblock representerar den dropdown meny dï¿½r anvï¿½ndare ska
+		 * vï¿½lja vilken krypteringsalgoritm som ska vï¿½ljas. Ska typ
+		 * implementeras sï¿½ att den bara kallar pï¿½ en metod som returnerar nï¿½n
+		 * typ av lista dï¿½r alla algortmer ï¿½r representerade.
 		 */
-		// alternativ på algoritmer
+		// alternativ pï¿½ algoritmer
 		String[] algorithms = { "Caesar", "Playfair", "Enigma" };
 		final JComboBox algorithmsDropdown = new JComboBox(algorithms);
 		algorithmsDropdown.setToolTipText("V\u00E4lj Algoritm");
 		algorithmsDropdown.setBounds(280, 206, 86, 20);
 		frame.getContentPane().add(algorithmsDropdown);
-		// JComboBox.getSelectedItem() kollar vilket alternativ som är valt
+		// JComboBox.getSelectedItem() kollar vilket alternativ som ï¿½r valt
 		// returnerar ett object
 
 		/*
-		 * Följande kodblock innehåller information om textrutan(vänster) som
-		 * det är tänkt att man ska skriva in text som man vill få krypterad
+		 * Fï¿½ljande kodblock innehï¿½ller information om textrutan(vï¿½nster) som
+		 * det ï¿½r tï¿½nkt att man ska skriva in text som man vill fï¿½ krypterad
 		 */
 		final JTextArea txtrTextAttKryptera = new JTextArea();
 		txtrTextAttKryptera.setText("Text att kryptera");
 		txtrTextAttKryptera.setBounds(70, 77, 200, 50);
 		frame.getContentPane().add(txtrTextAttKryptera);
 
-		// JTextArea.getText() hämtar texten i rutan, returnerar en string
+		// JTextArea.getText() hï¿½mtar texten i rutan, returnerar en string
 
 		/*
-		 * Följande kodblock innehåller information om textrutan(höger) som
-		 * användaren skriver in text som ska bli dekrypterad
+		 * Fï¿½ljande kodblock innehï¿½ller information om textrutan(hï¿½ger) som
+		 * anvï¿½ndaren skriver in text som ska bli dekrypterad
 		 */
 		final JTextArea txtrTextAttDekryptera = new JTextArea();
 		txtrTextAttDekryptera.setText("Text att dekryptera");
@@ -117,12 +117,12 @@ public class GUI {
 		frame.getContentPane().add(txtrTextAttDekryptera);
 
 		/*
-		 * Följande kodblock innehåller information om knappen "Kryptera", den
-		 * ska användaren trycka på när den vill kryptera den text som den
-		 * skrivit in i textrutan till vänster. Den krypterade texten kommer att
-		 * visas i den andra textrutan(höger) ala google translate. Finns det
-		 * ingen text i textrutan, ingen algoritm är vald eller ingen nyckel är
-		 * vald, ska användaren uppmärksammas på detta.
+		 * Fï¿½ljande kodblock innehï¿½ller information om knappen "Kryptera", den
+		 * ska anvï¿½ndaren trycka pï¿½ nï¿½r den vill kryptera den text som den
+		 * skrivit in i textrutan till vï¿½nster. Den krypterade texten kommer att
+		 * visas i den andra textrutan(hï¿½ger) ala google translate. Finns det
+		 * ingen text i textrutan, ingen algoritm ï¿½r vald eller ingen nyckel ï¿½r
+		 * vald, ska anvï¿½ndaren uppmï¿½rksammas pï¿½ detta.
 		 */
 		JButton btnButt = new JButton("Kryptera");
 		btnButt.addMouseListener(new MouseAdapter() {
@@ -133,12 +133,14 @@ public class GUI {
 						txtrTextAttKryptera.getText(), txtKey.getText(),
 						algorithmsDropdown.getSelectedItem());
 				System.out.println(values);
+				
+				Parser par = new Parser();
 
 				if (values != false) {
 					// TODO
-					// kalla på en metod som kirrar den krypterade texten
+					// kalla pï¿½ en metod som kirrar den krypterade texten
 					displayInTextArea(txtrTextAttDekryptera,
-							"Krypterad text osvosvosvo");
+							par.parseEncrypt(txtrTextAttKryptera.getText(), txtKey.getText()));
 				}
 			}
 		});
@@ -146,12 +148,12 @@ public class GUI {
 		frame.getContentPane().add(btnButt);
 
 		/*
-		 * Efterföljande kodblock innehåller information om knappen
-		 * "dekryptera", den skall tryckas när användaren vill dekryptera text
-		 * som denna skrivit in i den högra textrutan. Den dekrypterade texten
-		 * kommer att visas i den vänstra textrutan likt google translate. Finns
-		 * det ingen text i textrutan, ingen algoritm är vald eller ingen nyckel
-		 * är vald, ska användaren uppmärksammas på detta.
+		 * Efterfï¿½ljande kodblock innehï¿½ller information om knappen
+		 * "dekryptera", den skall tryckas nï¿½r anvï¿½ndaren vill dekryptera text
+		 * som denna skrivit in i den hï¿½gra textrutan. Den dekrypterade texten
+		 * kommer att visas i den vï¿½nstra textrutan likt google translate. Finns
+		 * det ingen text i textrutan, ingen algoritm ï¿½r vald eller ingen nyckel
+		 * ï¿½r vald, ska anvï¿½ndaren uppmï¿½rksammas pï¿½ detta.
 		 */
 		JButton btnButt_1 = new JButton("Dekryptera");
 		btnButt_1.addMouseListener(new MouseAdapter() {
@@ -165,7 +167,7 @@ public class GUI {
 
 				if (values != false) {
 					// TODO
-					// kalla på en metod som kirrar den dekrypterade texten
+					// kalla pï¿½ en metod som kirrar den dekrypterade texten
 					displayInTextArea(txtrTextAttKryptera,
 							"Dekrypterad text osvosov");
 				}
@@ -176,9 +178,9 @@ public class GUI {
 		frame.getContentPane().add(btnButt_1);
 
 		/*
-		 * Följande kodblock innehåller information om knappen
-		 * "kryptera textfil". När man trycker ska den först kolla om en
-		 * algoritm samt en nyckel är vald, sedan skall den skicka vidare till
+		 * Fï¿½ljande kodblock innehï¿½ller information om knappen
+		 * "kryptera textfil". Nï¿½r man trycker ska den fï¿½rst kolla om en
+		 * algoritm samt en nyckel ï¿½r vald, sedan skall den skicka vidare till
 		 * andra metoder
 		 */
 		JButton btnButt_2 = new JButton("Kryptera textfil");
@@ -195,7 +197,7 @@ public class GUI {
 		frame.getContentPane().add(btnButt_2);
 
 		/*
-		 * Innhåller information om knappen "dekryptera textfil". När den trycks
+		 * Innhï¿½ller information om knappen "dekryptera textfil". Nï¿½r den trycks
 		 * skall det kolla om det finns en algoritm samt en nyckel vald, sedan
 		 * skicka vidare till andra delar av programmet.
 		 */
