@@ -4,6 +4,7 @@ import java.util.LinkedList;
 /**
  * Turns strings into LinkedLists
  * @author Jonathan & Rickard
+ * @version 2015-05-12
  *
  */
 

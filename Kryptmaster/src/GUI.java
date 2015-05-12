@@ -23,6 +23,12 @@ import javax.swing.JLabel;
 
 import javax.swing.JTextArea;
 
+/**
+ * GUI for the Kryptmaster program
+ * @author Rickard & Jonathan
+ * @version 2015-05-12
+ *
+ */
 public class GUI {
 
 	private JFrame frame;
