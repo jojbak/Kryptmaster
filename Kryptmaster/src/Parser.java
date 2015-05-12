@@ -1,5 +1,6 @@
 import java.util.StringTokenizer;
 import java.util.LinkedList;
+import java.io.File;
 
 /**
  * Turns strings into LinkedLists
@@ -45,6 +46,13 @@ public class Parser {
 		}
 
 		return sb.toString();
+	}
+	
+	public void parseEncryptFile(){
+		ChooseFile cf = new ChooseFile();
+		File chosenFile = cf.filename;
+		//fortsätt här
+		
 	}
 	/**
 	 * Transforms a string into a linked list where each object is
