@@ -2,6 +2,7 @@ import java.util.LinkedList;
 
 /**
  * Implements the simple caesar algorithm using words as key
+ * Does not work with едц currently
  * 
  * @author Rickard & Jonathan
  * @version 2015-05-12
@@ -9,6 +10,13 @@ import java.util.LinkedList;
  */
 
 public class AlgCaesar /* implements Algorithm */{
+
+	private final int LOWER_ASCII_BOUND = 32; // lower limit for the ascii
+												// values we want
+	private final int HIGHER_ASCII_BOUND = 126; // higher limit for the ascii
+												// values we want
+	private final int RANGE_OF_ASCII = 94; // the span of the ascii values we
+											// want
 
 	/**
 	 * Encrypts a LinkedList containing strings using the caesar chipher.
@@ -28,23 +36,21 @@ public class AlgCaesar /* implements Algorithm */{
 			char[] chars = str.toCharArray();
 			for (int i = 0; i < chars.length; i++) {
 				// turns into ascii when casted to int
-
 				int val = (int) chars[i];
 				// if proper char based on ascii value range
-
-				if (val > 32 && val < 126) {
+				if (val > LOWER_ASCII_BOUND && val < HIGHER_ASCII_BOUND) {
 					// reduce for easier calculations, will increase to proper
 					// range later
-					val = val - 32;
+					val = val - LOWER_ASCII_BOUND;
 					// modulo to reduce into correct range
-					val = (val + keyInt) % 96;
+					val = (val + keyInt) % RANGE_OF_ASCII;
 					if (val < 0) {
-						val += 96;
+						val += RANGE_OF_ASCII;
 					}
 
 				}
-				//the 32 we subtracted earlier
-				chars[i] = (char) (val + 32);
+				// the 32 we subtracted earlier
+				chars[i] = (char) (val + LOWER_ASCII_BOUND);
 
 			}
 			String wordOut = new String(chars);
@@ -76,18 +82,18 @@ public class AlgCaesar /* implements Algorithm */{
 				// turns into ascii when casted to int
 				int val = (int) chars[i];
 				// if proper char based on ascii value range
-				if (val > 32 && val < 126) {
+				if (val > LOWER_ASCII_BOUND && val < HIGHER_ASCII_BOUND) {
 					// reduce for easier calculations, will increase to proper
 					// range later
-					val = val - 32;
+					val = val - LOWER_ASCII_BOUND;
 					// modulo to reduce into correct range
-					val = (val - keyInt) % 96;
+					val = (val - keyInt) % RANGE_OF_ASCII;
 					if (val < 0) {
-						val += 96;
+						val += RANGE_OF_ASCII;
 					}
 				}
-				//the 32 we subtracted earlier
-				chars[i] = (char) (val + 32);
+				// the 32 we subtracted earlier
+				chars[i] = (char) (val + LOWER_ASCII_BOUND);
 
 			}
 			String wordOut = new String(chars);
