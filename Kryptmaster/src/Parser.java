@@ -27,7 +27,7 @@ public class Parser {
 			sb.append(word);
 			sb.append(" ");
 		}
-
+		sb.setLength(sb.length() - 1);
 		return sb.toString();
 	}
 
@@ -45,13 +45,14 @@ public class Parser {
 			sb.append(" ");
 		}
 
+		sb.setLength(sb.length() - 1);
 		return sb.toString();
 	}
 	
 	public void parseEncryptFile(){
 		ChooseFile cf = new ChooseFile();
 		File chosenFile = cf.filename;
-		//fortsätt här
+		//fortsï¿½tt hï¿½r
 		
 	}
 	/**
