@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 
 /**
- * Turns strings into LinkedLists
+ * Turns strings into LinkedLists that are either encrypted or decrypted
  * @author Jonathan & Rickard
  * @version 2015-05-12
  *
@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 
 public class Parser {
 	AlgCaesar cae = new AlgCaesar();
+	AlgKryptmaster krypt = new AlgKryptmaster();
 	LinkedList<String> output = new LinkedList<String>();
 
 	/**
@@ -27,10 +28,13 @@ public class Parser {
 		switch(alg){
 		case "Caesar":
 			output = cae.encrypt(stringToList(in), key);
+			break;
 		case "Playfair":
 			output = cae.encrypt(stringToList(in), key); //byt ut till playfair
+			break;
 		case "Kryptmaster":
-			output = cae.encrypt(stringToList(in), key); //byt till kryptmaster
+			output = krypt.encrypt(stringToList(in), key);
+			break;
 		}
 		
 		StringBuilder sb = new StringBuilder();
@@ -52,10 +56,13 @@ public class Parser {
 		switch(alg){
 		case "Caesar":
 			output = cae.decrypt(stringToList(in), key);
+			break;
 		case "Playfair":
 			output = cae.decrypt(stringToList(in), key); //byt ut till playfair
+			break;
 		case "Kryptmaster":
-			output = cae.decrypt(stringToList(in), key); //byt till kryptmaster
+			output = krypt.decrypt(stringToList(in), key);
+			break;
 		}
 		StringBuilder sb = new StringBuilder();
 		for(String word : output){
@@ -85,10 +92,13 @@ public class Parser {
 		switch(alg){
 		case "Caesar":
 			output = cae.encrypt(inputStrings, key);
+			break;
 		case "Playfair":
 			output = cae.encrypt(inputStrings, key); //byt ut till playfair
+			break;
 		case "Kryptmaster":
-			output = cae.encrypt(inputStrings, key); //byt till kryptmaster
+			output = krypt.encrypt(inputStrings, key);
+			break;
 		}
 		StringBuilder sb = new StringBuilder();
 		for(String word : output){
@@ -121,10 +131,13 @@ public class Parser {
 		switch(alg){
 		case "Caesar":
 			output = cae.decrypt(inputStrings, key);
+			break;
 		case "Playfair":
 			output = cae.decrypt(inputStrings, key); //byt ut till playfair
+			break;
 		case "Kryptmaster":
-			output = cae.decrypt(inputStrings, key); //byt till kryptmaster
+			output = krypt.decrypt(inputStrings, key);
+			break;
 		}
 		StringBuilder sb = new StringBuilder();
 		for(String word : output){
