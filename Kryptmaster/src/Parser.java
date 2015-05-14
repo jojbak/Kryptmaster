@@ -64,10 +64,17 @@ public class Parser {
 		sb.setLength(sb.length() - 1);
 		return sb.toString();
 	}
-	
+	/**
+	 * With a given key and algorithm this method encrypts
+	 * the contents of a textfile. It creates a new textfile
+	 * with the output.
+	 * @param key
+	 * @param alg
+	 * @throws IOException
+	 */
 	public void parseEncryptFile(String key, String alg) throws IOException{
 		ChooseFile cf = new ChooseFile();
-		File chosenFile = cf.filename;
+		File chosenFile = cf.file;
 		InputFile input = new InputFile();
 		LinkedList<String> inputStrings = input.openFile(chosenFile);
 		
@@ -88,13 +95,20 @@ public class Parser {
 		sb.setLength(sb.length() - 1);
 		
 		PrintFile print = new PrintFile();
-		print.printFile(chosenFile.getParent(), sb.toString());
+		print.printFile(chosenFile.getParent(), sb.toString(), chosenFile.getName());
 		
 	}
-	
+	/**
+	 * With a given key and algorithm this method decrypts
+	 * the contents of a textfile. It creates a new textfile
+	 * with the output.
+	 * @param key
+	 * @param alg
+	 * @throws IOException
+	 */
 	public void parseDecryptFile(String key, String alg) throws IOException{
 		ChooseFile cf = new ChooseFile();
-		File chosenFile = cf.filename;
+		File chosenFile = cf.file;
 		InputFile input = new InputFile();
 		LinkedList<String> inputStrings = input.openFile(chosenFile);
 		
@@ -115,7 +129,7 @@ public class Parser {
 		sb.setLength(sb.length() - 1);
 		
 		PrintFile print = new PrintFile();
-		print.printFile(chosenFile.getParent(), sb.toString());
+		print.printFile(chosenFile.getParent(), sb.toString(), chosenFile.getName());
 		
 	}
 	/**
