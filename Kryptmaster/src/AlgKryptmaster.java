@@ -10,7 +10,7 @@ import java.util.Random;
  * @version 2015-05-14
  *
  */
-//untested code, not yet pushed
+// untested code, not yet pushed
 public class AlgKryptmaster implements Algorithm {
 	AlgCaesar cae = new AlgCaesar();
 
@@ -25,16 +25,16 @@ public class AlgKryptmaster implements Algorithm {
 	 * 
 	 */
 	@Override
-	public LinkedList<String> encrypt(LinkedList in, String key) {
+	public LinkedList<String> encrypt(LinkedList<String> in, String key) {
 		// creates a random with key as the seed, converts the string into ascii
 		// values
-		Random rand = new Random(cae.stringToInt(key));
+		Random rand = new Random((cae.stringToInt(key) * 23));
 		// encrypts the list with caesar algorithm
-		LinkedList<String> list = cae.encrypt(in, key);
+		LinkedList<String> encrypt = cae.encrypt(in, key);
 		// shuffle the encrypted list based on the seed from key
-		Collections.shuffle(list, rand);
+		Collections.shuffle(encrypt, rand);
 		// returns the now shuffled list
-		return list;
+		return encrypt;
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class AlgKryptmaster implements Algorithm {
 	@Override
 	public LinkedList<String> decrypt(LinkedList in, String key) {
 		// gets the key in ascii for the random seed
-		Random rand = new Random(cae.stringToInt(key));
+		Random rand = new Random((cae.stringToInt(key) * 23));
 		// creates a linked list that is to be used to find the original pos
 		LinkedList<Integer> shuffleList = new LinkedList<Integer>();
 		LinkedList<String> decryptedList = new LinkedList<String>();
@@ -61,21 +61,22 @@ public class AlgKryptmaster implements Algorithm {
 		// shuffles the list with ints with the same seed as used to encrypt
 		// to get what positions the list is shuffled
 		Collections.shuffle(shuffleList, rand);
-
 		// based on how the shuffleList got shuffled we can return
 		// the list we want to decrypt to its original positions
 		// on each positions is an int representing its original pos
 		// this enables us to now how it gets shuffled
 		int pos;
 		int iter = 0;
+		String s;
 		for (Integer i : shuffleList) {
 			pos = i;
 			// adds each object into its original pos
-			// ex: ele from place 4 to place 12
-			decryptedList.add(pos, in.get(iter).toString());
+			s = (String) in.get(iter);
+			decryptedList.set(pos, s);
 			iter++;
 		}
-		return (cae.decrypt(decryptedList, key));
+		decryptedList = cae.decrypt(decryptedList, key);
+		return decryptedList;
 	}
 
 }
