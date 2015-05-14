@@ -27,7 +27,7 @@ public class InputFile /*implements TextFileInput*/ {
 				in.add(part);
 			}
 		}
-		System.out.println(in);
+		//System.out.println(in);
 		return in;
 		
 	}

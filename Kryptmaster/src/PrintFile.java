@@ -1,22 +1,18 @@
 import java.io.*;
 public class PrintFile implements PrintToFile {
 
-	private final static String NAME = InputFile.class.getName();
+	private final static String NAME = PrintFile.class.getName();
 	public void printFile(String path, String out) throws IOException{
 		try{
-			File f = new File(path, "asd.txt");
-			f.getParentFile().mkdirs(); 
+			File f = new File(path, "asd(1).txt");
 			f.createNewFile();
 			
+			FileWriter fw = new FileWriter(f.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(out);
+			bw.close();
 			
 		}catch(IOException e){
-			System.err.printf("%s: %s%n", NAME, e);
-		}
-		
-		try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-	              new FileOutputStream(path), "utf-8"))) {
-				  writer.write(out);
-	    }catch(IOException e){
 			System.err.printf("%s: %s%n", NAME, e);
 		}
 	}

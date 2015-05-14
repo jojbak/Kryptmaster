@@ -66,7 +66,7 @@ public class Parser {
 		sb.setLength(sb.length() - 1);
 		
 		PrintFile print = new PrintFile();
-		print.printFile(chosenFile.getAbsolutePath(), sb.toString());
+		print.printFile(chosenFile.getParent(), sb.toString());
 		
 	}
 	/**
