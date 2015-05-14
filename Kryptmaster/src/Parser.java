@@ -3,6 +3,8 @@ import java.util.LinkedList;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.JFrame;
+
 /**
  * Turns strings into LinkedLists
  * @author Jonathan & Rickard
@@ -21,8 +23,16 @@ public class Parser {
 	 * @return String with encrypted text
 	 */
 	// This is a kind of hacky version, change to make work with algorithm objects.
-	public String parseEncrypt(String in, String key) {
-		output = cae.encrypt(stringToList(in), key);
+	public String parseEncrypt(String in, String key, String alg) {
+		switch(alg){
+		case "Caesar":
+			output = cae.encrypt(stringToList(in), key);
+		case "Playfair":
+			output = cae.encrypt(stringToList(in), key); //byt ut till playfair
+		case "Kryptmaster":
+			output = cae.encrypt(stringToList(in), key); //byt till kryptmaster
+		}
+		
 		StringBuilder sb = new StringBuilder();
 		for(String word : output){
 			sb.append(word);
@@ -38,8 +48,15 @@ public class Parser {
 	 * @param key Key to use
 	 * @return String with decrypted text
 	 */
-	public String parseDecrypt(String in, String key) {
-		output = cae.decrypt(stringToList(in), key);
+	public String parseDecrypt(String in, String key, String alg) {
+		switch(alg){
+		case "Caesar":
+			output = cae.decrypt(stringToList(in), key);
+		case "Playfair":
+			output = cae.decrypt(stringToList(in), key); //byt ut till playfair
+		case "Kryptmaster":
+			output = cae.decrypt(stringToList(in), key); //byt till kryptmaster
+		}
 		StringBuilder sb = new StringBuilder();
 		for(String word : output){
 			sb.append(word);
@@ -49,24 +66,76 @@ public class Parser {
 		sb.setLength(sb.length() - 1);
 		return sb.toString();
 	}
-	
-	public void parseEncryptFile(String key) throws IOException{
+	/**
+	 * With a given key and algorithm this method encrypts
+	 * the contents of a textfile. It creates a new textfile
+	 * with the output.
+	 * @param key
+	 * @param alg
+	 * @throws IOException
+	 */
+	public void parseEncryptFile(String key, String alg) throws IOException{
 		ChooseFile cf = new ChooseFile();
-		File chosenFile = cf.filename;
+		File chosenFile = cf.file;
+		if(chosenFile == null)
+			return;
 		InputFile input = new InputFile();
 		LinkedList<String> inputStrings = input.openFile(chosenFile);
 		
-		LinkedList<String> encrypted = cae.encrypt(inputStrings, key);
-		
+		switch(alg){
+		case "Caesar":
+			output = cae.encrypt(inputStrings, key);
+		case "Playfair":
+			output = cae.encrypt(inputStrings, key); //byt ut till playfair
+		case "Kryptmaster":
+			output = cae.encrypt(inputStrings, key); //byt till kryptmaster
+		}
 		StringBuilder sb = new StringBuilder();
-		for(String word : encrypted){
+		for(String word : output){
 			sb.append(word);
 			sb.append(" ");
 		}
+
 		sb.setLength(sb.length() - 1);
 		
 		PrintFile print = new PrintFile();
-		print.printFile(chosenFile.getAbsolutePath(), sb.toString());
+		print.printFile(chosenFile.getParent(), sb.toString(), chosenFile.getName());
+		
+	}
+	/**
+	 * With a given key and algorithm this method decrypts
+	 * the contents of a textfile. It creates a new textfile
+	 * with the output.
+	 * @param key
+	 * @param alg
+	 * @throws IOException
+	 */
+	public void parseDecryptFile(String key, String alg) throws IOException{
+		ChooseFile cf = new ChooseFile();
+		File chosenFile = cf.file;
+		if(chosenFile == null)
+			return;
+		InputFile input = new InputFile();
+		LinkedList<String> inputStrings = input.openFile(chosenFile);
+		
+		switch(alg){
+		case "Caesar":
+			output = cae.decrypt(inputStrings, key);
+		case "Playfair":
+			output = cae.decrypt(inputStrings, key); //byt ut till playfair
+		case "Kryptmaster":
+			output = cae.decrypt(inputStrings, key); //byt till kryptmaster
+		}
+		StringBuilder sb = new StringBuilder();
+		for(String word : output){
+			sb.append(word);
+			sb.append(" ");
+		}
+
+		sb.setLength(sb.length() - 1);
+		
+		PrintFile print = new PrintFile();
+		print.printFile(chosenFile.getParent(), sb.toString(), chosenFile.getName());
 		
 	}
 	/**

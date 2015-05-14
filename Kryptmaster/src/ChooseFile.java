@@ -2,35 +2,45 @@ import java.awt.EventQueue;
 import java.io.File;
 
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * This class implements JFileChooser enabling the 
+ * user to select a textfile via a GUI.
+ * @author Mr.Hax
+ *
+ */
 public class ChooseFile {
-	private JFrame frame;
-	File filename;
+	File file;
 	
 	public ChooseFile(){
 		initalize();
 		
 	}
-	
+	/**
+	 * Display the GUI and take certain actions
+	 * depending on user input.
+	 */
 	private void initalize(){
-		//frame = new JFrame();
-		//frame.setBounds(100, 100, 800, 600);
-		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
-	
-		
+			
 		JFileChooser chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Textfiler", "txt");
 		chooser.setFileFilter(filter);
-		int returnVal = chooser.showOpenDialog(null/*parent*/);
+		int returnVal = chooser.showOpenDialog(null);
 		//lï¿½gg till if-sats som kollar att filen ï¿½r txt
-		if(returnVal == JFileChooser.APPROVE_OPTION) {
-		  filename = chooser.getSelectedFile();
-		  //return filename;
+		if(returnVal == JFileChooser.APPROVE_OPTION) { //lägg till för "avbryt"
+			file = chooser.getSelectedFile();
+			String name = file.getName();
+			if(!name.substring(name.length()-4).equals(".txt")){
+				file = null; //skriv error meddelande
+				JOptionPane.showMessageDialog(null, "Only .txt files are allowed!");
+				return;
+			}
+		}else if(returnVal == JFileChooser.CANCEL_OPTION){
+			return;
 		}
-		//return null;
+		
 	}
 	
 	public static void main(String[] args) {
@@ -38,7 +48,6 @@ public class ChooseFile {
 			public void run() {
 				try {
 					ChooseFile window = new ChooseFile();
-					//window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

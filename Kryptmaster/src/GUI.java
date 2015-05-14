@@ -142,7 +142,8 @@ public class GUI {
 
 				if (values != false) {
 					displayInTextArea(txtrTextAttDekryptera, par.parseEncrypt(
-							txtrTextAttKryptera.getText(), txtKey.getText()));
+							txtrTextAttKryptera.getText(), txtKey.getText(),
+							algorithmsDropdown.getSelectedItem().toString()));
 				}
 			}
 		});
@@ -169,7 +170,8 @@ public class GUI {
 
 				if (values != false) {
 					displayInTextArea(txtrTextAttKryptera, par.parseDecrypt(
-							txtrTextAttDekryptera.getText(), txtKey.getText()));
+							txtrTextAttDekryptera.getText(), txtKey.getText(),
+							algorithmsDropdown.getSelectedItem().toString()));
 				}
 
 			}
@@ -193,9 +195,9 @@ public class GUI {
 				
 				if(values){
 					try {
-						par.parseEncryptFile(txtKey.getText());
+						par.parseEncryptFile(txtKey.getText(), 
+								algorithmsDropdown.getSelectedItem().toString());
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -216,6 +218,15 @@ public class GUI {
 			public void mouseClicked(MouseEvent e) {
 				boolean values = fileCryptionCheck(txtKey.getText(),
 						algorithmsDropdown.getSelectedItem());
+				
+				if(values){
+					try {
+						par.parseDecryptFile(txtKey.getText(), 
+								algorithmsDropdown.getSelectedItem().toString());
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
 
 			}
 		});
@@ -304,4 +315,5 @@ public class GUI {
 	public void displayInTextArea(JTextArea area, String text) {
 		area.setText(text);
 	}
+	
 }
