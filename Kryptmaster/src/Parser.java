@@ -3,6 +3,8 @@ import java.util.LinkedList;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.JFrame;
+
 /**
  * Turns strings into LinkedLists
  * @author Jonathan & Rickard
@@ -75,6 +77,8 @@ public class Parser {
 	public void parseEncryptFile(String key, String alg) throws IOException{
 		ChooseFile cf = new ChooseFile();
 		File chosenFile = cf.file;
+		if(chosenFile == null)
+			return;
 		InputFile input = new InputFile();
 		LinkedList<String> inputStrings = input.openFile(chosenFile);
 		
@@ -109,6 +113,8 @@ public class Parser {
 	public void parseDecryptFile(String key, String alg) throws IOException{
 		ChooseFile cf = new ChooseFile();
 		File chosenFile = cf.file;
+		if(chosenFile == null)
+			return;
 		InputFile input = new InputFile();
 		LinkedList<String> inputStrings = input.openFile(chosenFile);
 		

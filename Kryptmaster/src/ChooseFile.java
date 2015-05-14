@@ -2,7 +2,7 @@ import java.awt.EventQueue;
 import java.io.File;
 
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -30,7 +30,15 @@ public class ChooseFile {
 		int returnVal = chooser.showOpenDialog(null);
 		//lï¿½gg till if-sats som kollar att filen ï¿½r txt
 		if(returnVal == JFileChooser.APPROVE_OPTION) { //lägg till för "avbryt"
-		  file = chooser.getSelectedFile();
+			file = chooser.getSelectedFile();
+			String name = file.getName();
+			if(!name.substring(name.length()-4).equals(".txt")){
+				file = null; //skriv error meddelande
+				JOptionPane.showMessageDialog(null, "Only .txt files are allowed!");
+				return;
+			}
+		}else if(returnVal == JFileChooser.CANCEL_OPTION){
+			return;
 		}
 		
 	}
