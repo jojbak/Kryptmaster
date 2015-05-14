@@ -6,12 +6,15 @@ public class InputFile /*implements TextFileInput*/ {
 	private final static String NAME = InputFile.class.getName();
 	
 	
-	public void openFile(File file)throws IOException{
+	public LinkedList openFile(File file)throws IOException{
+		LinkedList<String> inputString = null;
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-	        readFile(reader);
+			inputString = readFile(reader);
 	    } catch (IOException e) {
 	        System.err.printf("%s: %s%n", NAME, e);
 	    }
+		
+		return inputString;
 	}
 	
 	public LinkedList readFile(BufferedReader reader)throws IOException{ 
@@ -19,9 +22,12 @@ public class InputFile /*implements TextFileInput*/ {
 		LinkedList<String> in = new LinkedList<String>();
 		while((text = reader.readLine()) != null){
 			StringTokenizer stk = new StringTokenizer(text);
-			String part = stk.nextToken();
-			in.add(part);
+			while(stk.hasMoreElements()){
+				String part = stk.nextToken();
+				in.add(part);
+			}
 		}
+		System.out.println(in);
 		return in;
 		
 	}

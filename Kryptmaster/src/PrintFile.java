@@ -4,7 +4,7 @@ public class PrintFile implements PrintToFile {
 	private final static String NAME = InputFile.class.getName();
 	public void printFile(String path, String out) throws IOException{
 		try{
-			File f = new File(path);
+			File f = new File(path, "asd.txt");
 			f.getParentFile().mkdirs(); 
 			f.createNewFile();
 			

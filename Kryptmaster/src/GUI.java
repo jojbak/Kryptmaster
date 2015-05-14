@@ -18,9 +18,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.JLabel;
-
 import javax.swing.JTextArea;
 
 /**
@@ -190,6 +190,15 @@ public class GUI {
 				boolean values = fileCryptionCheck(txtKey.getText(),
 						algorithmsDropdown.getSelectedItem());
 				System.out.println(values);
+				
+				if(values){
+					try {
+						par.parseEncryptFile(txtKey.getText());
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 
 			}
 		});

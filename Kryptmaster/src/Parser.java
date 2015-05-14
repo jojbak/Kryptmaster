@@ -1,6 +1,7 @@
 import java.util.StringTokenizer;
 import java.util.LinkedList;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Turns strings into LinkedLists
@@ -49,16 +50,29 @@ public class Parser {
 		return sb.toString();
 	}
 	
-	public void parseEncryptFile(){
+	public void parseEncryptFile(String key) throws IOException{
 		ChooseFile cf = new ChooseFile();
 		File chosenFile = cf.filename;
-		//forts�tt h�r
+		InputFile input = new InputFile();
+		LinkedList<String> inputStrings = input.openFile(chosenFile);
+		
+		LinkedList<String> encrypted = cae.encrypt(inputStrings, key);
+		
+		StringBuilder sb = new StringBuilder();
+		for(String word : encrypted){
+			sb.append(word);
+			sb.append(" ");
+		}
+		sb.setLength(sb.length() - 1);
+		
+		PrintFile print = new PrintFile();
+		print.printFile(chosenFile.getAbsolutePath(), sb.toString());
 		
 	}
 	/**
 	 * Transforms a string into a linked list where each object is
 	 * a word that was separated with a blank space
-	 * @param in Strint to turn into linked list
+	 * @param in Strint to turn into linkLinkedList<String> inputStringed list
 	 * @return LinkedList with strings
 	 */
 	private LinkedList<String> stringToList(String in){

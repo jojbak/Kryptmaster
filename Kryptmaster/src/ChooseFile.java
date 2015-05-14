@@ -25,9 +25,9 @@ public class ChooseFile {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Textfiler", "txt");
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showOpenDialog(null/*parent*/);
-		//lägg till if-sats som kollar att filen är txt
+		//lï¿½gg till if-sats som kollar att filen ï¿½r txt
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
-		  filename = chooser.getCurrentDirectory();
+		  filename = chooser.getSelectedFile();
 		  //return filename;
 		}
 		//return null;
