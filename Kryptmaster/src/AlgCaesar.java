@@ -9,7 +9,7 @@ import java.util.LinkedList;
  *
  */
 
-public class AlgCaesar /* implements Algorithm */{
+public class AlgCaesar  /*implements Algorithm*/ {
 
 	private final int LOWER_ASCII_BOUND = 32; // lower limit for the ascii
 												// values we want
@@ -70,7 +70,6 @@ public class AlgCaesar /* implements Algorithm */{
 	 *            String with the password
 	 * @return LinkedList with now decrypted and fully readable strings
 	 */
-
 	public LinkedList<String> decrypt(LinkedList<String> in, String key) {
 
 		LinkedList<String> out = new LinkedList<String>();
@@ -106,7 +105,7 @@ public class AlgCaesar /* implements Algorithm */{
 	/*
 	 * Transforms a string into a number using its ascii values
 	 */
-	private int stringToInt(String key) {
+	public int stringToInt(String key) {
 		int number = 0;
 		char[] chars = key.toCharArray();
 		for (int i = 0; i < chars.length; i++) {
@@ -115,4 +114,5 @@ public class AlgCaesar /* implements Algorithm */{
 		}
 		return (number);
 	}
+
 }

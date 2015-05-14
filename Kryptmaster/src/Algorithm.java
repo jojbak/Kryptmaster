@@ -11,11 +11,11 @@ public interface Algorithm {
 	/**
 	 * Encrypts a string
 	 */
-	String encrypt(LinkedList in, String key); //bestäm datastruktur
+	LinkedList<String> encrypt(LinkedList in, String key); //bestäm datastruktur
 	
 	/**
 	 * Decrypts a string
 	 */
-	String decrypt(LinkedList in, String key); //betäm datastruktur
+	LinkedList<String> decrypt(LinkedList in, String key); //betäm datastruktur
 	
 }

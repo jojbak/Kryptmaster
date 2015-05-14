@@ -10,7 +10,7 @@ import java.util.Random;
  * @version 2015-05-14
  *
  */
-//untested code
+//untested code, not yet pushed
 public class AlgKryptmaster implements Algorithm {
 	AlgCaesar cae = new AlgCaesar();
 
