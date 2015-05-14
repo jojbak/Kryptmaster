@@ -2,7 +2,7 @@
 
 /**
  * Imports text from a textfile
- * @author Mr.Hax
+ * @author Jonathan & Rickard
  *
  */
 import java.util.LinkedList;

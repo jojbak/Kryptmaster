@@ -35,6 +35,12 @@ public class GUI {
 	private JFrame frame;
 	private JTextField txtKey;
 	Parser par = new Parser();
+	
+	public enum Algorithm{
+		CAESAR, PLAYFAIR, KRYPTMASTER
+	}
+	
+	Algorithm algorithm;
 
 	/**
 	 * Launch the application.
@@ -141,8 +147,10 @@ public class GUI {
 						algorithmsDropdown.getSelectedItem());
 
 				if (values != false) {
+					System.out.println(algorithmsDropdown.getSelectedItem().toString());
 					displayInTextArea(txtrTextAttDekryptera, par.parseEncrypt(
-							txtrTextAttKryptera.getText(), txtKey.getText()));
+							txtrTextAttKryptera.getText(), txtKey.getText(),
+							algorithmsDropdown.getSelectedItem().toString()));
 				}
 			}
 		});
@@ -169,7 +177,8 @@ public class GUI {
 
 				if (values != false) {
 					displayInTextArea(txtrTextAttKryptera, par.parseDecrypt(
-							txtrTextAttDekryptera.getText(), txtKey.getText()));
+							txtrTextAttDekryptera.getText(), txtKey.getText(),
+							algorithmsDropdown.getSelectedItem().toString()));
 				}
 
 			}
@@ -193,7 +202,8 @@ public class GUI {
 				
 				if(values){
 					try {
-						par.parseEncryptFile(txtKey.getText());
+						par.parseEncryptFile(txtKey.getText(), 
+								algorithmsDropdown.getSelectedItem().toString());
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -304,4 +314,5 @@ public class GUI {
 	public void displayInTextArea(JTextArea area, String text) {
 		area.setText(text);
 	}
+	
 }
