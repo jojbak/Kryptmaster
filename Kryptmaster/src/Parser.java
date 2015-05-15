@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 
 public class Parser {
 	AlgCaesar cae = new AlgCaesar();
+	AlgPlayfair play = new AlgPlayfair();
 	AlgKryptmaster krypt = new AlgKryptmaster();
 	LinkedList<String> output = new LinkedList<String>();
 
@@ -30,7 +31,7 @@ public class Parser {
 			output = cae.encrypt(stringToList(in), key);
 			break;
 		case "Playfair":
-			output = cae.encrypt(stringToList(in), key); //byt ut till playfair
+			output = play.encrypt(stringToList(in), key); //byt ut till playfair
 			break;
 		case "Kryptmaster":
 			output = krypt.encrypt(stringToList(in), key);
@@ -58,7 +59,7 @@ public class Parser {
 			output = cae.decrypt(stringToList(in), key);
 			break;
 		case "Playfair":
-			output = cae.decrypt(stringToList(in), key); //byt ut till playfair
+			output = play.decrypt(stringToList(in), key); //byt ut till playfair
 			break;
 		case "Kryptmaster":
 			output = krypt.decrypt(stringToList(in), key);
@@ -94,7 +95,7 @@ public class Parser {
 			output = cae.encrypt(inputStrings, key);
 			break;
 		case "Playfair":
-			output = cae.encrypt(inputStrings, key); //byt ut till playfair
+			output = play.encrypt(inputStrings, key); //byt ut till playfair
 			break;
 		case "Kryptmaster":
 			output = krypt.encrypt(inputStrings, key);
@@ -133,7 +134,7 @@ public class Parser {
 			output = cae.decrypt(inputStrings, key);
 			break;
 		case "Playfair":
-			output = cae.decrypt(inputStrings, key); //byt ut till playfair
+			output = play.decrypt(inputStrings, key); //byt ut till playfair
 			break;
 		case "Kryptmaster":
 			output = krypt.decrypt(inputStrings, key);
