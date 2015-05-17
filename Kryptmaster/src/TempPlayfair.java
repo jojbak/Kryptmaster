@@ -31,6 +31,7 @@ public class TempPlayfair {
 				
 			}
 		}
+		return list;
 	}
 
 }
