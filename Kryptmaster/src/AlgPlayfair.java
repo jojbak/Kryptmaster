@@ -61,7 +61,7 @@ public class AlgPlayfair implements Algorithm {
 	private char[][] buildPlayfairMatrix(String key) {
 		String alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"; // alphabet w/out j
 		// preps the key
-		key = prepKey(key);
+		key = prepText(key);
 		// adds the alphabet to the end of the key
 		key += alphabet;
 		char[][] matrix = new char[5][5];
@@ -100,8 +100,8 @@ public class AlgPlayfair implements Algorithm {
 	 *            The key to be used
 	 * @return The prepped key
 	 */
-	private String prepKey(String key) {
-		Scanner sc = new Scanner(key);
+	private String prepText(String text) {
+		Scanner sc = new Scanner(text);
 		String fixed = sc.nextLine();
 		fixed = fixed.toUpperCase();
 		// removes anything not in the alphabet
