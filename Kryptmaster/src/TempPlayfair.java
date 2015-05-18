@@ -123,5 +123,50 @@ public class TempPlayfair {
 		String outString = new String(output);
 		return outString;
 	}
+	
+	public String decrypt(String input){
+		String[] pairs = format(input);
+		int length = pairs.length;
+		char[] output = new char[length*2];
+		for (int i = 0; i < length; i++) {
+			char one = pairs[i].charAt(0);
+			char two = pairs[i].charAt(1);
+			int col1 = getCoord(one).getX();
+			int row1 = getCoord(one).getY();
+			int col2 = getCoord(two).getX();
+			int row2 = getCoord(two).getY();
+
+			if (col1 == col2) {
+				if (row1 != 0)
+					row1--;
+				else
+					row1 = 0;
+
+				if (row2 != 0)
+					row2--;
+				else
+					row2 = 0;
+			} else if (row1 == row2) {
+				if (col1 != 0)
+					col1--;
+				else
+					col1 = 0;
+
+				if (col2 != 0)
+					col2--;
+				else
+					col2 = 0;
+			}else{
+				int temp = col2;
+				col2 = col1;
+				col1 = temp;
+			}
+			
+			output[i] = matrix[col1][row1];
+			output[i+1] = matrix[col2][row2];
+		}
+		String outString = new String(output);
+		return outString;
+	}
 
 }

@@ -49,6 +49,55 @@ public class AlgPlayfair implements Algorithm {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	/**
+	 * This method formats the input String, enabling it to be encrypted
+	 * @param input
+	 * @return
+	 */
+	private String[] format(String input) {
+		char[] chars = input.toCharArray();
+		/*for (int i = 0; i < chars.length; i++) {
+			if (chars[i] == 'j')
+				chars[i] = 'i';
+		}*/ //borde ej behövas iom preptext
+
+		String text = new String(chars);
+
+		int len = text.length();
+		for (int i = 0; i < len; i = i + 2) {
+			if (text.charAt(i) == text.charAt(i + 1)) {
+				text = text.substring(0, i + 1) + 'X' + text.substring(i + 1); // add X to separate two of the same char in a row
+			}																	
+		}																
+				
+		if (text.length() % 2 != 0)
+			text = text + "X"; // add X if the last char is "alone"
+
+		return partition(text);
+	}
+	
+	/**
+	 * This method divides the string into digraphs
+	 * @param input
+	 * @return
+	 */
+	private String[] partition(String input) { // kolla datastruktur
+		int len = input.length() / 2;
+		String[] pairs = new String[len];
+		char[] chars = input.toCharArray();
+
+		for (int i = 0; i < chars.length; i = i + 2) {
+			String s1 = Character.toString(chars[i]);
+			String s2 = Character.toString(chars[i + 1]);
+			int j = i - 1;
+			if (i == 0)
+				j = 0;
+			pairs[j] = s1 + s2;
+		}
+
+		return pairs;
+	}
 
 	/**
 	 * Creates the 5x5 matrix the playfair cipher is based on. i will translate
