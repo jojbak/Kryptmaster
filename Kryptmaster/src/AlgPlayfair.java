@@ -200,14 +200,22 @@ public class AlgPlayfair /*implements Algorithm*/ {
 		return partition(input);
 	}
 	
+	//se över denna
 	private String format2(String input){
 		int len = input.length();
-		for (int i = 0; i < len; i = i + 2) {
+		int i = 0;
+		System.out.println("len: " + len);
+		while(i < len){
+			System.out.println("i+2: " + (i+2));
+			if(i+2 < len-2){
+				//System.out.println()
+			    if (input.charAt(i) == input.charAt(i + 2)) {
+				    input = input.substring(0, i+1) + input.substring(i + 2);
 			
-			if (input.charAt(i) == input.charAt(i + 2)) {
-				input = input.substring(0, i) + input.substring(i + 2);
-			
+			    }
 			}
+			i++;
+			System.out.println("i: " + i);
 		}
 		return input;
 	}
@@ -227,7 +235,7 @@ public class AlgPlayfair /*implements Algorithm*/ {
 			String s2 = Character.toString(chars[i + 1]);
 			int j = i/2;
 			pairs[j] = s1 + s2;
-			System.out.println(s1+s2);
+			//System.out.println(s1+s2);
 		}
 
 		return pairs;
