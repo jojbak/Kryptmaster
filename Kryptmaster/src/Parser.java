@@ -17,6 +17,7 @@ public class Parser {
 	AlgPlayfair play = new AlgPlayfair();
 	AlgKryptmaster krypt = new AlgKryptmaster();
 	LinkedList<String> output = new LinkedList<String>();
+	String out;
 
 	/**
 	 * Sends a string to specified encryption algorithm
@@ -31,8 +32,8 @@ public class Parser {
 			output = cae.encrypt(stringToList(in), key);
 			break;
 		case "Playfair":
-			output = play.encrypt(stringToList(in), key); //byt ut till playfair
-			break;
+			out = play.encrypt(stringWithoutSpaces(in), key); //byt ut till playfair
+			return out;
 		case "Kryptmaster":
 			output = krypt.encrypt(stringToList(in), key);
 			break;
@@ -59,8 +60,8 @@ public class Parser {
 			output = cae.decrypt(stringToList(in), key);
 			break;
 		case "Playfair":
-			output = play.decrypt(stringToList(in), key); //byt ut till playfair
-			break;
+			out = play.decrypt(stringWithoutSpaces(in), key); //byt ut till playfair
+			return out;
 		case "Kryptmaster":
 			output = krypt.decrypt(stringToList(in), key);
 			break;
@@ -95,8 +96,10 @@ public class Parser {
 			output = cae.encrypt(inputStrings, key);
 			break;
 		case "Playfair":
-			output = play.encrypt(inputStrings, key); //byt ut till playfair
-			break;
+			out = play.encrypt(listToString(inputStrings), key); //byt ut till playfair
+			PrintFile print = new PrintFile();
+			print.printFile(chosenFile.getParent(), out, chosenFile.getName());
+			return;
 		case "Kryptmaster":
 			output = krypt.encrypt(inputStrings, key);
 			break;
@@ -134,8 +137,10 @@ public class Parser {
 			output = cae.decrypt(inputStrings, key);
 			break;
 		case "Playfair":
-			output = play.decrypt(inputStrings, key); //byt ut till playfair
-			break;
+			out = play.decrypt(listToString(inputStrings), key); //byt ut till playfair
+			PrintFile print = new PrintFile();
+			print.printFile(chosenFile.getParent(), out, chosenFile.getName());
+			return;
 		case "Kryptmaster":
 			output = krypt.decrypt(inputStrings, key);
 			break;
@@ -165,5 +170,23 @@ public class Parser {
 			input.add(stk.nextToken());
 		}
 		return input;
+	}
+	
+	private String stringWithoutSpaces(String in){
+		StringTokenizer stk = new StringTokenizer(in);
+		StringBuilder sb = new StringBuilder();
+		while (stk.hasMoreTokens()) {
+			sb.append(stk.nextToken());
+		}
+		
+		return sb.toString();
+	}
+	
+	private String listToString(LinkedList<String> in){
+		StringBuilder sb = new StringBuilder();
+		for(String word : in){
+			sb.append(word);
+		}
+		return sb.toString();
 	}
 }

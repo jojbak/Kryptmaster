@@ -13,7 +13,9 @@ import java.util.Scanner;
  * @version 2015-05-14
  *
  */
-public class AlgPlayfair implements Algorithm {
+public class AlgPlayfair /*implements Algorithm*/ {
+	char[][] matrix = new char[5][5];
+	
 	/**
 	 * Encrypts a linked list with the playfair cipher based on a key
 	 * 
@@ -23,15 +25,56 @@ public class AlgPlayfair implements Algorithm {
 	 *            String containig a key, remember this for decryption
 	 * @return LinkedList with encrypted text
 	 */
-	@Override
-	public LinkedList<String> encrypt(LinkedList in, String key) {
-		char[][] matrix = new char[5][5];
+	//@Override
+	public String encrypt(String input, String key) {
+		String uppercased = prepText(input);
 		matrix = buildPlayfairMatrix(key);
 		displayMatrix(matrix);
 
-		// TODO
-		// returns in to avoid errors
-		return in;
+		String[] pairs = format(uppercased);
+		int length = pairs.length;
+		char[] output = new char[length*2];
+		for (int i = 0; i < length; i++) {
+			char one = pairs[i].charAt(0);
+			char two = pairs[i].charAt(1);
+			Point pointOne = getCoord(one);
+			Point pointTwo = getCoord(two);
+			int col1 = pointOne.getX();
+			int row1 = pointOne.getY();
+			int col2 = pointTwo.getX();
+			int row2 = pointTwo.getY();
+			
+			if (col1 == col2) {
+				if (row1 != 4)
+					row1++;
+				else
+					row1 = 0;
+
+				if (row2 != 4)
+					row2++;
+				else
+					row2 = 0;
+			} else if (row1 == row2) {
+				if (col1 != 4)
+					col1++;
+				else
+					col1 = 0;
+
+				if (col2 != 4)
+					col2++;
+				else
+					col2 = 0;
+			}else{
+				int temp = col1;
+				col1 = col2;
+				col2 = temp;
+			}
+			
+			output[i*2] = matrix[row1][col1];
+			output[i*2+1] = matrix[row2][col2];
+		}
+		String outString = new String(output);
+		return outString;
 	}
 
 	/**
@@ -44,10 +87,97 @@ public class AlgPlayfair implements Algorithm {
 	 *            String with the key that was used to encrypt
 	 * @return LinkedList containing the decrypted and readable text
 	 */
-	@Override
-	public LinkedList<String> decrypt(LinkedList in, String key) {
-		// TODO Auto-generated method stub
-		return null;
+	//@Override
+	public String decrypt(String input, String key) {
+		matrix = buildPlayfairMatrix(key);
+		displayMatrix(matrix);
+		String uppercased = prepText(input);
+		//String[] pairs = format(uppercased);
+		String[] pairs = partition(uppercased);
+		int length = pairs.length;
+		
+		char[] output = new char[length*2];
+		for (int i = 0; i < length; i++) {
+			char one = pairs[i].charAt(0);
+			char two = pairs[i].charAt(1);
+			Point pointOne = getCoord(one);
+			Point pointTwo = getCoord(two);
+			int col1 = pointOne.getX();
+			int row1 = pointOne.getY();
+			int col2 = pointTwo.getX();
+			int row2 = pointTwo.getY();
+			
+
+			if (col1 == col2) {
+				if (row1 != 0)
+					row1--;
+				else
+					row1 = 0;
+
+				if (row2 != 0)
+					row2--;
+				else
+					row2 = 0;
+			} else if (row1 == row2) {
+				if (col1 != 0)
+					col1--;
+				else
+					col1 = 0;
+
+				if (col2 != 0)
+					col2--;
+				else
+					col2 = 0;
+			}else{
+				int temp = col2;
+				col2 = col1;
+				col1 = temp;
+			}
+			
+			output[i*2] = matrix[row1][col1];
+			output[i*2+1] = matrix[row2][col2];
+		}
+		String outString = new String(output);
+		String outputStr = format2(outString);
+		return outputStr;
+	}
+	
+	/**
+	 * This class describes a point in the cipher matrix
+	 * 
+	 * @author Jonathan
+	 *
+	 */
+	private class Point {
+		int x;
+		int y;
+
+		public Point(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
+
+		public int getX() {
+			return x;
+		}
+
+		public int getY() {
+			return y;
+		}
+	}
+
+	private Point getCoord(char ch) {
+		Point pt = new Point(0, 0);
+		if (ch == 'j')
+			ch = 'i';
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				if (matrix[i][j] == ch) {
+					pt = new Point(j, i);
+				}
+			}
+		}
+		return pt;
 	}
 	
 	/**
@@ -56,25 +186,30 @@ public class AlgPlayfair implements Algorithm {
 	 * @return
 	 */
 	private String[] format(String input) {
-		char[] chars = input.toCharArray();
-		/*for (int i = 0; i < chars.length; i++) {
-			if (chars[i] == 'j')
-				chars[i] = 'i';
-		}*/ //borde ej behövas iom preptext
-
-		String text = new String(chars);
-
-		int len = text.length();
+		int len = input.length();
 		for (int i = 0; i < len; i = i + 2) {
-			if (text.charAt(i) == text.charAt(i + 1)) {
-				text = text.substring(0, i + 1) + 'X' + text.substring(i + 1); // add X to separate two of the same char in a row
+			if (input.charAt(i) == input.charAt(i + 1)) {
+				input = input.substring(0, i + 1) + 'X' + input.substring(i + 1); // add X to separate two of the same char in a row
 			}																	
 		}																
 				
-		if (text.length() % 2 != 0)
-			text = text + "X"; // add X if the last char is "alone"
+		if (input.length() % 2 != 0)
+			input = input + "X"; // add X if the last char is "alone"
+		//System.out.println("Text i format: " + text);
 
-		return partition(text);
+		return partition(input);
+	}
+	
+	private String format2(String input){
+		int len = input.length();
+		for (int i = 0; i < len; i = i + 2) {
+			
+			if (input.charAt(i) == input.charAt(i + 2)) {
+				input = input.substring(0, i) + input.substring(i + 2);
+			
+			}
+		}
+		return input;
 	}
 	
 	/**
@@ -90,10 +225,9 @@ public class AlgPlayfair implements Algorithm {
 		for (int i = 0; i < chars.length; i = i + 2) {
 			String s1 = Character.toString(chars[i]);
 			String s2 = Character.toString(chars[i + 1]);
-			int j = i - 1;
-			if (i == 0)
-				j = 0;
+			int j = i/2;
 			pairs[j] = s1 + s2;
+			System.out.println(s1+s2);
 		}
 
 		return pairs;
