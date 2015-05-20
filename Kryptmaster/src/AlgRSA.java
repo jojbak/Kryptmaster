@@ -84,8 +84,3 @@ public class AlgRSA {
 	}
 
 }
-
-/**
- * Med hjälp av den key som skickas in så randomiseras den privata nyckeln. Den
- * publika nyckeln kör vi är samma varje gång.
- */

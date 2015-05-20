@@ -11,7 +11,7 @@ import java.util.Random;
  *
  */
 // untested code, not yet pushed
-public class AlgKryptmaster implements Algorithm {
+public class AlgKryptmaster{
 	AlgCaesar cae = new AlgCaesar();
 
 	/**
@@ -24,7 +24,6 @@ public class AlgKryptmaster implements Algorithm {
 	 *            to decrypt
 	 * 
 	 */
-	@Override
 	public LinkedList<String> encrypt(LinkedList<String> in, String key) {
 		// creates a random with key as the seed, converts the string into ascii
 		// values
@@ -46,7 +45,6 @@ public class AlgKryptmaster implements Algorithm {
 	 * @param key
 	 *            The key used to encrypt will now be used to decrypt
 	 */
-	@Override
 	public LinkedList<String> decrypt(LinkedList in, String key) {
 		// gets the key in ascii for the random seed
 		Random rand = new Random((cae.stringToInt(key) * 23));

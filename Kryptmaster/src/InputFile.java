@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 import java.io.*;
-public class InputFile /*implements TextFileInput*/ {
+public class InputFile implements TextFileInput {
 	
 	private final static String NAME = InputFile.class.getName();
 	
@@ -27,7 +27,6 @@ public class InputFile /*implements TextFileInput*/ {
 				in.add(part);
 			}
 		}
-		//System.out.println(in);
 		return in;
 		
 	}

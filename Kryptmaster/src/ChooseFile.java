@@ -8,7 +8,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  * This class implements JFileChooser enabling the 
  * user to select a textfile via a GUI.
- * @author Mr.Hax
+ * @author Jonathan & Rickard
  *
  */
 public class ChooseFile {
@@ -29,7 +29,7 @@ public class ChooseFile {
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showOpenDialog(null);
 		//lï¿½gg till if-sats som kollar att filen ï¿½r txt
-		if(returnVal == JFileChooser.APPROVE_OPTION) { //lägg till för "avbryt"
+		if(returnVal == JFileChooser.APPROVE_OPTION) { //lï¿½gg till fï¿½r "avbryt"
 			file = chooser.getSelectedFile();
 			String name = file.getName();
 			if(!name.substring(name.length()-4).equals(".txt")){

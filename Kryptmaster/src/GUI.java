@@ -96,7 +96,7 @@ public class GUI {
 		 * n�n typ av lista d�r alla algortmer �r representerade.
 		 */
 		// alternativ p� algoritmer
-		String[] algorithms = { "Caesar", "Playfair", "Enigma" };
+		String[] algorithms = { "Caesar", "Playfair", "Enigma", "RSA" };
 		final JComboBox algorithmsDropdown = new JComboBox(algorithms);
 		algorithmsDropdown.setToolTipText("V\u00E4lj Algoritm");
 		algorithmsDropdown.setBounds(280, 206, 86, 20);

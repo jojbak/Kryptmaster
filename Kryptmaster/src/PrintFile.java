@@ -3,7 +3,12 @@ public class PrintFile implements PrintToFile {
 
 	private final static String NAME = PrintFile.class.getName();
 	/**
-	 * Create a new textfile and print the output to it
+	 * Create a new textfile and print the output to it.
+	 * The file has the same name as the input file but with
+	 * "(1)" in the end.
+	 * @param path, The path to the directory
+	 * @param out, The output String
+	 * @param oldFileName, The name of the input file
 	 */
 	public void printFile(String path, String out, String oldFileName) throws IOException{
 		try{

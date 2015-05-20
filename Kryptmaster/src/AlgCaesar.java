@@ -2,14 +2,14 @@ import java.util.LinkedList;
 
 /**
  * Implements the simple caesar algorithm using words as key
- * Does not work with едц currently
+ * Does not work with пїЅпїЅпїЅ currently
  * 
  * @author Rickard & Jonathan
  * @version 2015-05-12
  *
  */
 
-public class AlgCaesar  /*implements Algorithm*/ {
+public class AlgCaesar{
 
 	private final int LOWER_ASCII_BOUND = 32; // lower limit for the ascii
 												// values we want
@@ -27,7 +27,7 @@ public class AlgCaesar  /*implements Algorithm*/ {
 	 *            A password which we base the encryption on
 	 * @return LinkedList containing encrypted strings
 	 */
-	// implementera е д och ц
+	// implementera пїЅ пїЅ och пїЅ
 	public LinkedList<String> encrypt(LinkedList<String> in, String key) {
 		int keyInt = stringToInt(key);
 		LinkedList<String> out = new LinkedList<String>();
@@ -102,7 +102,7 @@ public class AlgCaesar  /*implements Algorithm*/ {
 		return out;
 	}
 
-	/*
+	/**
 	 * Transforms a string into a number using its ascii values
 	 */
 	public int stringToInt(String key) {

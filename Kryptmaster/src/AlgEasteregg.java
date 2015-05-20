@@ -8,16 +8,16 @@ import java.util.Map;
  * @version 2015-05-15
  *
  */
-public class AlgEasteregg implements Algorithm{
+public class AlgEasteregg{
 
 	HashMap<Character,String> map = new HashMap<Character,String>();
 	
-	@Override
+	
 	public LinkedList<String> encrypt(LinkedList<String> in, String key) {
 		return null;
 	}
 
-	@Override
+	
 	public LinkedList<String> decrypt(LinkedList<String> in, String key) {
 		// TODO Auto-generated method stub
 		return null;
