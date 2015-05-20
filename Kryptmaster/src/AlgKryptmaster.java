@@ -2,6 +2,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
 
+import javax.swing.JProgressBar;
+
 /**
  * From the authors of kryptmaster comes a new revolutinary way to encrypt text.
  * It uses a variety of algs to come to an amazing performance.
@@ -11,8 +13,9 @@ import java.util.Random;
  *
  */
 // untested code, not yet pushed
-public class AlgKryptmaster{
+public class AlgKryptmaster {
 	AlgCaesar cae = new AlgCaesar();
+	AlgRSA rsa = new AlgRSA();
 
 	/**
 	 * Encrypts a linked list using a specified key
@@ -22,14 +25,17 @@ public class AlgKryptmaster{
 	 * @param key
 	 *            A key to be used in the encryption, remember this if you want
 	 *            to decrypt
+	 * @param jpb Reference to JProgressBar used to indicate progress when dealing with files
 	 * 
 	 */
-	public LinkedList<String> encrypt(LinkedList<String> in, String key) {
+	public LinkedList<String> encrypt(LinkedList<String> in, String key, JProgressBar jpb) {
 		// creates a random with key as the seed, converts the string into ascii
 		// values
 		Random rand = new Random((cae.stringToInt(key) * 23));
+		//encrypts with rsa
+		LinkedList<String> encrypt= rsa.encrypt(in,key);
 		// encrypts the list with caesar algorithm
-		LinkedList<String> encrypt = cae.encrypt(in, key);
+		encrypt = cae.encrypt(encrypt, key, jpb);
 		// shuffle the encrypted list based on the seed from key
 		Collections.shuffle(encrypt, rand);
 		// returns the now shuffled list
@@ -44,8 +50,9 @@ public class AlgKryptmaster{
 	 *            LinkedList containing encrypted text
 	 * @param key
 	 *            The key used to encrypt will now be used to decrypt
+	 * @param jpb JProgressBar to be used when dealing with larger files
 	 */
-	public LinkedList<String> decrypt(LinkedList in, String key) {
+	public LinkedList<String> decrypt(LinkedList in, String key, JProgressBar jpb) {
 		// gets the key in ascii for the random seed
 		Random rand = new Random((cae.stringToInt(key) * 23));
 		// creates a linked list that is to be used to find the original pos
@@ -73,7 +80,8 @@ public class AlgKryptmaster{
 			decryptedList.set(pos, s);
 			iter++;
 		}
-		decryptedList = cae.decrypt(decryptedList, key);
+		decryptedList = cae.decrypt(decryptedList, key, jpb);
+		decryptedList = rsa.decrypt(decryptedList, key);
 		return decryptedList;
 	}
 
