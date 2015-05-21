@@ -32,12 +32,13 @@ public class AlgKryptmaster {
 		// creates a random with key as the seed, converts the string into ascii
 		// values
 		Random rand = new Random((cae.stringToInt(key) * 23));
-		//encrypts with rsa
-		LinkedList<String> encrypt= rsa.encrypt(in,key);
 		// encrypts the list with caesar algorithm
-		encrypt = cae.encrypt(encrypt, key);
+		LinkedList<String>encrypt = cae.encrypt(in, key);
 		// shuffle the encrypted list based on the seed from key
 		Collections.shuffle(encrypt, rand);
+		//encrypts with rsa
+		encrypt= rsa.encrypt(encrypt,key);
+
 		// returns the now shuffled list
 		return encrypt;
 	}
@@ -58,6 +59,8 @@ public class AlgKryptmaster {
 		// creates a linked list that is to be used to find the original pos
 		LinkedList<Integer> shuffleList = new LinkedList<Integer>();
 		LinkedList<String> decryptedList = new LinkedList<String>();
+		//last encrypt first decrypt
+		in = rsa.decrypt(in, key);
 		// fills it with ints up to the size of the list we want to decrypt
 		for (int i = 0; i < in.size(); i++) {
 			shuffleList.add(i);
@@ -81,7 +84,6 @@ public class AlgKryptmaster {
 			iter++;
 		}
 		decryptedList = cae.decrypt(decryptedList, key);
-		decryptedList = rsa.decrypt(decryptedList, key);
 		return decryptedList;
 	}
 
