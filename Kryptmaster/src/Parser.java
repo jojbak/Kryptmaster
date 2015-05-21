@@ -222,4 +222,23 @@ public class Parser {
 		}
 		return sb.toString();
 	}
+	/**
+	 * easteregg
+	 * @param in
+	 */
+	public String easteregg(String in){
+		//easteregg can only handle lowercase letters
+		in = in.toLowerCase();
+		AlgEasteregg east = new AlgEasteregg();
+		LinkedList<String> out = new LinkedList<String>(); 
+		output = east.encrypt(stringToList(in));
+		
+		StringBuilder sb = new StringBuilder();
+		for(String word : output){
+			sb.append(word);
+			sb.append(" ");
+		}
+
+		return sb.toString();
+	}
 }

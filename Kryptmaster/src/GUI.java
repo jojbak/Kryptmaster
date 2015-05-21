@@ -142,9 +142,15 @@ public class GUI {
 						algorithmsDropdown.getSelectedItem());
 
 				if (values != false) {
-					displayInTextArea(txtrTextAttDekryptera, par.parseEncrypt(
-							txtrTextAttKryptera.getText(), txtKey.getText(),
-							algorithmsDropdown.getSelectedItem().toString()));
+					if (easterEggCheck(txtrTextAttDekryptera, txtKey.getText())) {
+						displayInTextArea(txtrTextAttKryptera,
+								par.easteregg(txtrTextAttKryptera.getText()));
+					} else {
+						displayInTextArea(txtrTextAttDekryptera, par
+								.parseEncrypt(txtrTextAttKryptera.getText(),
+										txtKey.getText(), algorithmsDropdown
+												.getSelectedItem().toString()));
+					}
 				}
 			}
 		});
@@ -191,10 +197,10 @@ public class GUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				boolean values = fileCryptionCheck(txtKey.getText(),
-						algorithmsDropdown.getSelectedItem());				
-				if(values){
+						algorithmsDropdown.getSelectedItem());
+				if (values) {
 					try {
-						par.parseEncryptFile(txtKey.getText(), 
+						par.parseEncryptFile(txtKey.getText(),
 								algorithmsDropdown.getSelectedItem().toString());
 					} catch (IOException e1) {
 						e1.printStackTrace();
@@ -217,10 +223,10 @@ public class GUI {
 			public void mouseClicked(MouseEvent e) {
 				boolean values = fileCryptionCheck(txtKey.getText(),
 						algorithmsDropdown.getSelectedItem());
-				
-				if(values){
+
+				if (values) {
 					try {
-						par.parseDecryptFile(txtKey.getText(), 
+						par.parseDecryptFile(txtKey.getText(),
 								algorithmsDropdown.getSelectedItem().toString());
 					} catch (IOException e1) {
 						e1.printStackTrace();
@@ -314,5 +320,18 @@ public class GUI {
 	public void displayInTextArea(JTextArea area, String text) {
 		area.setText(text);
 	}
-	
+
+	/**
+	 * Implements super secret easter egg
+	 * 
+	 * @param area
+	 * @param key
+	 */
+	private boolean easterEggCheck(JTextArea area, String key) {
+		if (area.getText().equals("1337") && key.equals("1337")) {
+			return true;
+		}
+		return false;
+	}
+
 }

@@ -15,6 +15,7 @@ public class AlgEasteregg{
 	
 	
 	public LinkedList<String> encrypt(LinkedList<String> in) {
+		generateAlphabet();
 		LinkedList<String> output = new LinkedList<>();
 		for(String str : in){
 			StringBuilder sb = new StringBuilder();
@@ -57,6 +58,16 @@ public class AlgEasteregg{
 		alphabet.put('x', "}{");
 		alphabet.put('y', "'//");
 		alphabet.put('z', "2");
+		alphabet.put('1', "!!!!!1111oneone");
+		alphabet.put('2', "2");
+		alphabet.put('3', "3");
+		alphabet.put('4', "4");
+		alphabet.put('5', "5");
+		alphabet.put('6',"6");
+		alphabet.put('7',"7");
+		alphabet.put('8',"8");
+		alphabet.put('9',"9");
+		alphabet.put('0', "0");
 		
 	}
 	
