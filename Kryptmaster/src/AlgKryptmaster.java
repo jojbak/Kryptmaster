@@ -5,14 +5,13 @@ import java.util.Random;
 import javax.swing.JProgressBar;
 
 /**
- * From the authors of kryptmaster comes a new revolutinary way to encrypt text.
+ * From the authors of the kryptmaster platform comes a new revolutinary way to encrypt text.
  * It uses a variety of algs to come to an amazing performance.
  * 
  * @author rickard & jonathan
  * @version 2015-05-14
  *
  */
-// untested code, not yet pushed
 public class AlgKryptmaster {
 	AlgCaesar cae = new AlgCaesar();
 	AlgRSA rsa = new AlgRSA();
