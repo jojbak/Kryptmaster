@@ -62,7 +62,10 @@ public class AlgRSA {
 	}
 
 	/**
-	 * Generates the necessary keys based on the userinputed key
+	 * Generates the necessary keys based on the userinputed key.
+	 * This is not a safe way to generate a key, this program
+	 * is for educational purposes. To learn how RSA works I recommend: 
+	 * https://www.youtube.com/watch?v=4zahvcJ9glg series.
 	 * 
 	 * @param key
 	 *            The key inputed by the user
