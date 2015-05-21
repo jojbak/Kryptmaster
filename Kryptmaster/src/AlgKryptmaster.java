@@ -28,14 +28,14 @@ public class AlgKryptmaster {
 	 * @param jpb Reference to JProgressBar used to indicate progress when dealing with files
 	 * 
 	 */
-	public LinkedList<String> encrypt(LinkedList<String> in, String key, JProgressBar jpb) {
+	public LinkedList<String> encrypt(LinkedList<String> in, String key) {
 		// creates a random with key as the seed, converts the string into ascii
 		// values
 		Random rand = new Random((cae.stringToInt(key) * 23));
 		//encrypts with rsa
 		LinkedList<String> encrypt= rsa.encrypt(in,key);
 		// encrypts the list with caesar algorithm
-		encrypt = cae.encrypt(encrypt, key, jpb);
+		encrypt = cae.encrypt(encrypt, key);
 		// shuffle the encrypted list based on the seed from key
 		Collections.shuffle(encrypt, rand);
 		// returns the now shuffled list
@@ -52,7 +52,7 @@ public class AlgKryptmaster {
 	 *            The key used to encrypt will now be used to decrypt
 	 * @param jpb JProgressBar to be used when dealing with larger files
 	 */
-	public LinkedList<String> decrypt(LinkedList in, String key, JProgressBar jpb) {
+	public LinkedList<String> decrypt(LinkedList in, String key) {
 		// gets the key in ascii for the random seed
 		Random rand = new Random((cae.stringToInt(key) * 23));
 		// creates a linked list that is to be used to find the original pos
@@ -80,7 +80,7 @@ public class AlgKryptmaster {
 			decryptedList.set(pos, s);
 			iter++;
 		}
-		decryptedList = cae.decrypt(decryptedList, key, jpb);
+		decryptedList = cae.decrypt(decryptedList, key);
 		decryptedList = rsa.decrypt(decryptedList, key);
 		return decryptedList;
 	}

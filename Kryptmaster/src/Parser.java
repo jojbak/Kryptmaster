@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFrame;
+import javax.swing.JProgressBar;
 
 /**
  * Turns strings into LinkedLists that are either encrypted or decrypted
@@ -19,6 +20,11 @@ public class Parser {
 	AlgRSA rsa = new AlgRSA();
 	LinkedList<String> output = new LinkedList<String>();
 	String out;
+	JProgressBar jpb;
+	
+	public Parser(JProgressBar jpb){
+		this.jpb = jpb;
+	}
 
 	/**
 	 * Sends a string to specified encryption algorithm
@@ -93,13 +99,14 @@ public class Parser {
 	 * @throws IOException
 	 */
 	public void parseEncryptFile(String key, String alg) throws IOException{
+		jpb.setString("Reading from file..");
 		ChooseFile cf = new ChooseFile();
 		File chosenFile = cf.file;
 		if(chosenFile == null)
 			return;
 		InputFile input = new InputFile();
 		LinkedList<String> inputStrings = input.openFile(chosenFile);
-		
+		jpb.setString("Encrypting text...");
 		switch(alg){
 		case "Caesar":
 			output = cae.encrypt(inputStrings, key);
@@ -126,6 +133,8 @@ public class Parser {
 		
 		PrintFile print = new PrintFile();
 		print.printFile(chosenFile.getParent(), sb.toString(), chosenFile.getName());
+		jpb.setString("Done");
+
 		
 	}
 	/**
@@ -137,13 +146,14 @@ public class Parser {
 	 * @throws IOException
 	 */
 	public void parseDecryptFile(String key, String alg) throws IOException{
+		jpb.setString("Reading from file..");
 		ChooseFile cf = new ChooseFile();
 		File chosenFile = cf.file;
 		if(chosenFile == null)
 			return;
 		InputFile input = new InputFile();
 		LinkedList<String> inputStrings = input.openFile(chosenFile);
-		
+		jpb.setString("Decrypting File...");
 		switch(alg){
 		case "Caesar":
 			output = cae.decrypt(inputStrings, key);
@@ -170,7 +180,7 @@ public class Parser {
 		
 		PrintFile print = new PrintFile();
 		print.printFile(chosenFile.getParent(), sb.toString(), chosenFile.getName());
-		
+		jpb.setString("Done");
 	}
 	/**
 	 * Transforms a string into a linked list where each object is

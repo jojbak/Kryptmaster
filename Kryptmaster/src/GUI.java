@@ -31,10 +31,10 @@ import javax.swing.JTextArea;
  *
  */
 public class GUI {
-
+	JProgressBar progressBar = new JProgressBar();
 	private JFrame frame;
 	private JTextField txtKey;
-	Parser par = new Parser();
+	Parser par = new Parser(progressBar);
 
 	/**
 	 * Launch the application.
@@ -73,9 +73,10 @@ public class GUI {
 		 * Denna bar ska representera hur l�ng tid det tar att kryptera
 		 * st�rre textfiler
 		 */
-		JProgressBar progressBar = new JProgressBar();
 		progressBar.setBounds(280, 297, 208, 23);
 		frame.getContentPane().add(progressBar);
+		progressBar.setValue(0);
+		progressBar.setStringPainted(true);
 
 		/*
 		 * Textf�ltet som inneh�ller den nyckel som anv�ndare sj�lv
@@ -190,9 +191,7 @@ public class GUI {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				boolean values = fileCryptionCheck(txtKey.getText(),
-						algorithmsDropdown.getSelectedItem());
-				System.out.println(values);
-				
+						algorithmsDropdown.getSelectedItem());				
 				if(values){
 					try {
 						par.parseEncryptFile(txtKey.getText(), 
