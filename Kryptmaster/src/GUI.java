@@ -113,6 +113,7 @@ public class GUI {
 		final JTextArea txtrTextAttKryptera = new JTextArea();
 		txtrTextAttKryptera.setText("Text att kryptera");
 		txtrTextAttKryptera.setBounds(70, 77, 200, 50);
+		txtrTextAttKryptera.setLineWrap(true);
 		frame.getContentPane().add(txtrTextAttKryptera);
 
 		/*
@@ -122,6 +123,7 @@ public class GUI {
 		final JTextArea txtrTextAttDekryptera = new JTextArea();
 		txtrTextAttDekryptera.setText("Text att dekryptera");
 		txtrTextAttDekryptera.setBounds(498, 77, 225, 55);
+		txtrTextAttDekryptera.setLineWrap(true);
 		frame.getContentPane().add(txtrTextAttDekryptera);
 
 		/*
