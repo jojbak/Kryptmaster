@@ -24,7 +24,12 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 /**
- * GUI for the Kryptmaster program
+ * GUI for the Kryptmaster program!
+ * 
+ * The Krypstmaster system lets the use explore some of the 
+ * basics in encryptions to allow for an experience like none other.
+ * Compare the traditional Caeser- and Playfaircipher with the hypermodern
+ * Rivest-Shamir-Adleman(RSA) asymmetrical encryption. 
  * 
  * @author Rickard & Jonathan
  * @version 2015-05-12
@@ -138,12 +143,13 @@ public class GUI {
 		btnButt.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-
+				//checks all required fields
 				boolean values = quickCryptionCheck(
 						txtrTextAttKryptera.getText(), txtKey.getText(),
 						algorithmsDropdown.getSelectedItem());
-
+				//if all info is provided, go forth
 				if (values != false) {
+					//easteregg conditions checked
 					if (easterEggCheck(txtrTextAttDekryptera, txtKey.getText())) {
 						displayInTextArea(txtrTextAttKryptera,
 								par.easteregg(txtrTextAttKryptera.getText()));
@@ -172,11 +178,11 @@ public class GUI {
 		btnButt_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
+				//checks all required fields
 				boolean values = quickCryptionCheck(
 						txtrTextAttDekryptera.getText(), txtKey.getText(),
 						algorithmsDropdown.getSelectedItem());
-
+				//if fields provided we can continue
 				if (values != false) {
 					displayInTextArea(txtrTextAttKryptera, par.parseDecrypt(
 							txtrTextAttDekryptera.getText(), txtKey.getText(),
@@ -198,6 +204,7 @@ public class GUI {
 		btnButt_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				//checks all required fields
 				boolean values = fileCryptionCheck(txtKey.getText(),
 						algorithmsDropdown.getSelectedItem());
 				if (values) {
@@ -223,9 +230,10 @@ public class GUI {
 		btnButt_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				//checks all required fields
 				boolean values = fileCryptionCheck(txtKey.getText(),
 						algorithmsDropdown.getSelectedItem());
-
+				//have to be able to catch because of file manipulation
 				if (values) {
 					try {
 						par.parseDecryptFile(txtKey.getText(),
@@ -243,7 +251,7 @@ public class GUI {
 	}
 
 	/**
-	 * Displays an error message in the form of a JOptionPane in the chooses
+	 * Displays an error message in the form of a JOptionPane in the choosen
 	 * JFrame frame
 	 * 
 	 * @param frame
