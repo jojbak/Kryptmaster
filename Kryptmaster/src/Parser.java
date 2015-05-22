@@ -8,6 +8,7 @@ import javax.swing.JProgressBar;
 
 /**
  * Turns strings into LinkedLists that are either encrypted or decrypted
+ * 
  * @author Jonathan & Rickard
  * @version 2015-05-12
  *
@@ -21,21 +22,26 @@ public class Parser {
 	LinkedList<String> output = new LinkedList<String>();
 	String out;
 	JProgressBar jpb;
-	
-	public Parser(JProgressBar jpb){
+
+	public Parser(JProgressBar jpb) {
 		this.jpb = jpb;
 	}
 
 	/**
 	 * Sends a string to specified encryption algorithm
-	 * @param in String to encrypt
-	 * @param key Key to use in encryption
-	 * @param alg The chosen algorithm
+	 * 
+	 * @param in
+	 *            String to encrypt
+	 * @param key
+	 *            Key to use in encryption
+	 * @param alg
+	 *            The chosen algorithm
 	 * @return String with encrypted text
 	 */
-	// This is a kind of hacky version, change to make work with algorithm objects.
+	// This is a kind of hacky version, change to make work with algorithm
+	// objects.
 	public String parseEncrypt(String in, String key, String alg) {
-		switch(alg){
+		switch (alg) {
 		case "Caesar":
 			output = cae.encrypt(stringToList(in), key);
 			break;
@@ -49,9 +55,9 @@ public class Parser {
 			output = rsa.encrypt(stringToList(in), key);
 			break;
 		}
-		
+
 		StringBuilder sb = new StringBuilder();
-		for(String word : output){
+		for (String word : output) {
 			sb.append(word);
 			sb.append(" ");
 		}
@@ -61,13 +67,17 @@ public class Parser {
 
 	/**
 	 * Sends a encrypted string to a specified algorithm for decryption
-	 * @param in String to decrypt
-	 * @param key Key to use
-	 * @param alg The chosen algorithm
+	 * 
+	 * @param in
+	 *            String to decrypt
+	 * @param key
+	 *            Key to use
+	 * @param alg
+	 *            The chosen algorithm
 	 * @return String with decrypted text
 	 */
 	public String parseDecrypt(String in, String key, String alg) {
-		switch(alg){
+		switch (alg) {
 		case "Caesar":
 			output = cae.decrypt(stringToList(in), key);
 			break;
@@ -82,7 +92,7 @@ public class Parser {
 			break;
 		}
 		StringBuilder sb = new StringBuilder();
-		for(String word : output){
+		for (String word : output) {
 			sb.append(word);
 			sb.append(" ");
 		}
@@ -90,24 +100,27 @@ public class Parser {
 		sb.setLength(sb.length() - 1);
 		return sb.toString();
 	}
+
 	/**
-	 * With a given key and algorithm this method encrypts
-	 * the contents of a textfile. It creates a new textfile
-	 * with the output.
-	 * @param key The encryption key
-	 * @param alg The chosen algorithm
+	 * With a given key and algorithm this method encrypts the contents of a
+	 * textfile. It creates a new textfile with the output.
+	 * 
+	 * @param key
+	 *            The encryption key
+	 * @param alg
+	 *            The chosen algorithm
 	 * @throws IOException
 	 */
-	public void parseEncryptFile(String key, String alg) throws IOException{
+	public void parseEncryptFile(String key, String alg) throws IOException {
 		jpb.setString("Reading from file..");
 		ChooseFile cf = new ChooseFile();
 		File chosenFile = cf.file;
-		if(chosenFile == null)
+		if (chosenFile == null)
 			return;
 		InputFile input = new InputFile();
 		LinkedList<String> inputStrings = input.openFile(chosenFile);
 		jpb.setString("Encrypting text...");
-		switch(alg){
+		switch (alg) {
 		case "Caesar":
 			output = cae.encrypt(inputStrings, key);
 			break;
@@ -124,37 +137,40 @@ public class Parser {
 			break;
 		}
 		StringBuilder sb = new StringBuilder();
-		for(String word : output){
+		for (String word : output) {
 			sb.append(word);
 			sb.append(" ");
 		}
 
 		sb.setLength(sb.length() - 1);
-		
+
 		PrintFile print = new PrintFile();
-		print.printFile(chosenFile.getParent(), sb.toString(), chosenFile.getName());
+		print.printFile(chosenFile.getParent(), sb.toString(),
+				chosenFile.getName());
 		jpb.setString("Done");
 
-		
 	}
+
 	/**
-	 * With a given key and algorithm this method decrypts
-	 * the contents of a textfile. It creates a new textfile
-	 * with the output.
-	 * @param key The encryption key
-	 * @param alg The chosen algorithm
+	 * With a given key and algorithm this method decrypts the contents of a
+	 * textfile. It creates a new textfile with the output.
+	 * 
+	 * @param key
+	 *            The encryption key
+	 * @param alg
+	 *            The chosen algorithm
 	 * @throws IOException
 	 */
-	public void parseDecryptFile(String key, String alg) throws IOException{
+	public void parseDecryptFile(String key, String alg) throws IOException {
 		jpb.setString("Reading from file..");
 		ChooseFile cf = new ChooseFile();
 		File chosenFile = cf.file;
-		if(chosenFile == null)
+		if (chosenFile == null)
 			return;
 		InputFile input = new InputFile();
 		LinkedList<String> inputStrings = input.openFile(chosenFile);
 		jpb.setString("Decrypting File...");
-		switch(alg){
+		switch (alg) {
 		case "Caesar":
 			output = cae.decrypt(inputStrings, key);
 			break;
@@ -171,24 +187,28 @@ public class Parser {
 			break;
 		}
 		StringBuilder sb = new StringBuilder();
-		for(String word : output){
+		for (String word : output) {
 			sb.append(word);
 			sb.append(" ");
 		}
 
 		sb.setLength(sb.length() - 1);
-		
+
 		PrintFile print = new PrintFile();
-		print.printFile(chosenFile.getParent(), sb.toString(), chosenFile.getName());
+		print.printFile(chosenFile.getParent(), sb.toString(),
+				chosenFile.getName());
 		jpb.setString("Done");
 	}
+
 	/**
-	 * Transforms a string into a linked list where each object is
-	 * a word that was separated with a blank space
-	 * @param in Strint to turn into linkLinkedList<String> inputStringed list
+	 * Transforms a string into a linked list where each object is a word that
+	 * was separated with a blank space
+	 * 
+	 * @param in
+	 *            Strint to turn into linkLinkedList<String> inputStringed list
 	 * @return LinkedList with strings
 	 */
-	private LinkedList<String> stringToList(String in){
+	private LinkedList<String> stringToList(String in) {
 		StringTokenizer stk = new StringTokenizer(in);
 		LinkedList<String> input = new LinkedList<String>();
 		while (stk.hasMoreTokens()) {
@@ -196,45 +216,53 @@ public class Parser {
 		}
 		return input;
 	}
+
 	/**
 	 * Removes the whitespaces in a String.
-	 * @param in, The String to be manipulated
+	 * 
+	 * @param in
+	 *            , The String to be manipulated
 	 * @return The String without whitespaces
 	 */
-	private String stringWithoutSpaces(String in){
+	private String stringWithoutSpaces(String in) {
 		StringTokenizer stk = new StringTokenizer(in);
 		StringBuilder sb = new StringBuilder();
 		while (stk.hasMoreTokens()) {
 			sb.append(stk.nextToken());
 		}
-		
+
 		return sb.toString();
 	}
+
 	/**
 	 * Creates a String with the contents of a LinkedList.
-	 * @param in, The LinkedList to be converted
+	 * 
+	 * @param in
+	 *            , The LinkedList to be converted
 	 * @return The String converted from the LinkedList
 	 */
-	private String listToString(LinkedList<String> in){
+	private String listToString(LinkedList<String> in) {
 		StringBuilder sb = new StringBuilder();
-		for(String word : in){
+		for (String word : in) {
 			sb.append(word);
 		}
 		return sb.toString();
 	}
+
 	/**
 	 * easteregg
+	 * 
 	 * @param in
 	 */
-	public String easteregg(String in){
-		//easteregg can only handle lowercase letters
+	public String easteregg(String in) {
+		// easteregg can only handle lowercase letters
 		in = in.toLowerCase();
 		AlgEasteregg east = new AlgEasteregg();
-		LinkedList<String> out = new LinkedList<String>(); 
+		LinkedList<String> out = new LinkedList<String>();
 		output = east.encrypt(stringToList(in));
-		
+
 		StringBuilder sb = new StringBuilder();
-		for(String word : output){
+		for (String word : output) {
 			sb.append(word);
 			sb.append(" ");
 		}

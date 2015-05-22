@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @version 2015-05-14
  *
  */
-public class AlgPlayfair{
+public class AlgPlayfair {
 	char[][] matrix = new char[5][5];
 
 	/**
@@ -36,14 +36,14 @@ public class AlgPlayfair{
 		for (int i = 0; i < length; i++) {
 			char one = pairs[i].charAt(0);
 			char two = pairs[i].charAt(1);
-			//get the letters coordinates
+			// get the letters coordinates
 			Point pointOne = getCoord(one);
 			Point pointTwo = getCoord(two);
 			int col1 = pointOne.getX();
 			int row1 = pointOne.getY();
 			int col2 = pointTwo.getX();
 			int row2 = pointTwo.getY();
-			//the letters are in the same column
+			// the letters are in the same column
 			if (col1 == col2) {
 				if (row1 != 4)
 					row1++;
@@ -54,7 +54,7 @@ public class AlgPlayfair{
 					row2++;
 				else
 					row2 = 0;
-				//the letters are in the same row
+				// the letters are in the same row
 			} else if (row1 == row2) {
 				if (col1 != 4)
 					col1++;
@@ -65,7 +65,7 @@ public class AlgPlayfair{
 					col2++;
 				else
 					col2 = 0;
-				//the letters create a rectangle
+				// the letters create a rectangle
 			} else {
 				int temp = col1;
 				col1 = col2;
@@ -100,14 +100,14 @@ public class AlgPlayfair{
 		for (int i = 0; i < length; i++) {
 			char one = pairs[i].charAt(0);
 			char two = pairs[i].charAt(1);
-			//get the letters coordinates
+			// get the letters coordinates
 			Point pointOne = getCoord(one);
 			Point pointTwo = getCoord(two);
 			int col1 = pointOne.getX();
 			int row1 = pointOne.getY();
 			int col2 = pointTwo.getX();
 			int row2 = pointTwo.getY();
-			//the letters are in the same column
+			// the letters are in the same column
 			if (col1 == col2) {
 				if (row1 != 0)
 					row1--;
@@ -118,7 +118,7 @@ public class AlgPlayfair{
 					row2--;
 				else
 					row2 = 4;
-				//the letters are in the same row
+				// the letters are in the same row
 			} else if (row1 == row2) {
 				if (col1 != 0)
 					col1--;
@@ -129,7 +129,7 @@ public class AlgPlayfair{
 					col2--;
 				else
 					col2 = 4;
-				//the letters create a rectangle
+				// the letters create a rectangle
 			} else {
 				int temp = col2;
 				col2 = col1;
@@ -158,18 +158,23 @@ public class AlgPlayfair{
 			this.x = x;
 			this.y = y;
 		}
-		//return column value
+
+		// return column value
 		public int getX() {
 			return x;
 		}
-		//return row value
+
+		// return row value
 		public int getY() {
 			return y;
 		}
 	}
+
 	/**
-	 * Finds a letter's coordinates in the matrix 
-	 * @param ch, the letter to be found
+	 * Finds a letter's coordinates in the matrix
+	 * 
+	 * @param ch
+	 *            , the letter to be found
 	 * @return pt, the Point of the letter in the matrix
 	 */
 	private Point getCoord(char ch) {
@@ -212,9 +217,11 @@ public class AlgPlayfair{
 	}
 
 	/**
-	 * This method formats the decrypted text, removing any 'X'
-	 * that separates two of the same characters in a row.
-	 * @param input, the dekrypted text
+	 * This method formats the decrypted text, removing any 'X' that separates
+	 * two of the same characters in a row.
+	 * 
+	 * @param input
+	 *            , the dekrypted text
 	 * @return
 	 */
 	private String formatDekrypt(String input) {
@@ -222,7 +229,8 @@ public class AlgPlayfair{
 		int i = 0;
 		while (i < len) {
 			if (i + 2 < len - 2) {
-				if ((input.charAt(i) == input.charAt(i + 2)) && input.charAt(i+1) == 'X') {
+				if ((input.charAt(i) == input.charAt(i + 2))
+						&& input.charAt(i + 1) == 'X') {
 					input = input.substring(0, i + 1) + input.substring(i + 2);
 
 				}
@@ -236,7 +244,8 @@ public class AlgPlayfair{
 	/**
 	 * This method divides the string into digraphs.
 	 * 
-	 * @param input, the String to be partitioned
+	 * @param input
+	 *            , the String to be partitioned
 	 * @return An array of digraphs in the form of Strings
 	 */
 	private String[] partition(String input) {

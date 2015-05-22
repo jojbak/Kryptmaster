@@ -5,8 +5,8 @@ import java.util.Random;
 import javax.swing.JProgressBar;
 
 /**
- * From the authors of the kryptmaster platform comes a new revolutinary way to encrypt text.
- * It uses a variety of algs to come to an amazing performance.
+ * From the authors of the kryptmaster platform comes a new revolutinary way to
+ * encrypt text. It uses a variety of algs to come to an amazing performance.
  * 
  * @author rickard & jonathan
  * @version 2015-05-14
@@ -24,7 +24,9 @@ public class AlgKryptmaster {
 	 * @param key
 	 *            A key to be used in the encryption, remember this if you want
 	 *            to decrypt
-	 * @param jpb Reference to JProgressBar used to indicate progress when dealing with files
+	 * @param jpb
+	 *            Reference to JProgressBar used to indicate progress when
+	 *            dealing with files
 	 * 
 	 */
 	public LinkedList<String> encrypt(LinkedList<String> in, String key) {
@@ -32,11 +34,11 @@ public class AlgKryptmaster {
 		// values
 		Random rand = new Random((cae.stringToInt(key) * 23));
 		// encrypts the list with caesar algorithm
-		LinkedList<String>encrypt = cae.encrypt(in, key);
+		LinkedList<String> encrypt = cae.encrypt(in, key);
 		// shuffle the encrypted list based on the seed from key
 		Collections.shuffle(encrypt, rand);
-		//encrypts with rsa
-		encrypt= rsa.encrypt(encrypt,key);
+		// encrypts with rsa
+		encrypt = rsa.encrypt(encrypt, key);
 
 		// returns the now shuffled list
 		return encrypt;
@@ -50,7 +52,8 @@ public class AlgKryptmaster {
 	 *            LinkedList containing encrypted text
 	 * @param key
 	 *            The key used to encrypt will now be used to decrypt
-	 * @param jpb JProgressBar to be used when dealing with larger files
+	 * @param jpb
+	 *            JProgressBar to be used when dealing with larger files
 	 */
 	public LinkedList<String> decrypt(LinkedList in, String key) {
 		// gets the key in ascii for the random seed
@@ -58,7 +61,7 @@ public class AlgKryptmaster {
 		// creates a linked list that is to be used to find the original pos
 		LinkedList<Integer> shuffleList = new LinkedList<Integer>();
 		LinkedList<String> decryptedList = new LinkedList<String>();
-		//last encrypt first decrypt
+		// last encrypt first decrypt
 		in = rsa.decrypt(in, key);
 		// fills it with ints up to the size of the list we want to decrypt
 		for (int i = 0; i < in.size(); i++) {

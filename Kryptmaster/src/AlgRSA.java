@@ -15,14 +15,17 @@ public class AlgRSA {
 	private BigInteger publicKey;
 	private BigInteger privateKey;
 	private BigInteger modulus;
-	
+
 	private LinkedList<String> encryptedOut;
 	private LinkedList<String> decryptedOut;
 
 	/**
 	 * Encrypts using the RSA algorithm, ie the public key is used
-	 * @param in The LinkedList of string that wants to be encrypted
-	 * @param key The key used to encrypt
+	 * 
+	 * @param in
+	 *            The LinkedList of string that wants to be encrypted
+	 * @param key
+	 *            The key used to encrypt
 	 * @return LinkedList with numbers
 	 */
 	public LinkedList<String> encrypt(LinkedList<String> in, String key) {
@@ -30,31 +33,35 @@ public class AlgRSA {
 		encryptedOut = new LinkedList<String>();
 		// for each word in the thing we want to encrypt
 		for (String str : in) {
-			//transform string into bytes to enable conversion
-			//to BigInteger
+			// transform string into bytes to enable conversion
+			// to BigInteger
 			BigInteger val = new BigInteger(str.getBytes());
-			//gets the encrypted value using our public keys
+			// gets the encrypted value using our public keys
 			encryptedOut.add(((val.modPow(publicKey, modulus))).toString());
 		}
 		return encryptedOut;
 	}
+
 	/**
-	 * Decrypts using the RSA algorithm, if it has been encrypted with
-	 * the proper public key it should decrypt.
-	 * @param in LinkedList of numbers that should be decrypted
-	 * @param key Key used to ensure that the private key is correct
+	 * Decrypts using the RSA algorithm, if it has been encrypted with the
+	 * proper public key it should decrypt.
+	 * 
+	 * @param in
+	 *            LinkedList of numbers that should be decrypted
+	 * @param key
+	 *            Key used to ensure that the private key is correct
 	 * @return LinkedList containing the decrypted text
 	 */
 	public LinkedList<String> decrypt(LinkedList<String> in, String key) {
 		keyGen(key);
 		decryptedOut = new LinkedList<String>();
-		
-		for(String str : in){
-			//should represent the  correct numbers
+
+		for (String str : in) {
+			// should represent the correct numbers
 			BigInteger val = new BigInteger(str);
-			//gets our original value back through RSA
+			// gets our original value back through RSA
 			BigInteger decrypt = val.modPow(privateKey, modulus);
-			//turns BigInteger back into string
+			// turns BigInteger back into string
 			String dec = new String(decrypt.toByteArray());
 			decryptedOut.add(dec);
 		}
@@ -62,9 +69,9 @@ public class AlgRSA {
 	}
 
 	/**
-	 * Generates the necessary keys based on the userinputed key.
-	 * This is not a safe way to generate a key, this program
-	 * is for educational purposes. To learn how RSA works I recommend: 
+	 * Generates the necessary keys based on the userinputed key. This is not a
+	 * safe way to generate a key, this program is for educational purposes. To
+	 * learn how RSA works I recommend:
 	 * https://www.youtube.com/watch?v=4zahvcJ9glg series.
 	 * 
 	 * @param key

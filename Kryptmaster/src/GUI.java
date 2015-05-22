@@ -26,10 +26,10 @@ import javax.swing.JTextArea;
 /**
  * GUI for the Kryptmaster program!
  * 
- * The Krypstmaster system lets the use explore some of the 
- * basics in encryptions to allow for an experience like none other.
- * Compare the traditional Caeser- and Playfaircipher with the hypermodern
- * Rivest-Shamir-Adleman(RSA) asymmetrical encryption. 
+ * The Krypstmaster system lets the use explore some of the basics in
+ * encryptions to allow for an experience like none other. Compare the
+ * traditional Caeser- and Playfaircipher with the hypermodern
+ * Rivest-Shamir-Adleman(RSA) asymmetrical encryption.
  * 
  * @author Rickard & Jonathan
  * @version 2015-05-12
@@ -75,8 +75,8 @@ public class GUI {
 
 		/*
 		 * Inneh�ller den progressbaren som eventuellt kommer att implementars
-		 * Denna bar ska representera hur l�ng tid det tar att kryptera
-		 * st�rre textfiler
+		 * Denna bar ska representera hur l�ng tid det tar att kryptera st�rre
+		 * textfiler
 		 */
 		progressBar.setBounds(280, 297, 208, 23);
 		frame.getContentPane().add(progressBar);
@@ -84,10 +84,10 @@ public class GUI {
 		progressBar.setStringPainted(true);
 
 		/*
-		 * Textf�ltet som inneh�ller den nyckel som anv�ndare sj�lv
-		 * matar in. Denna nyckel kan variera beroende p� vilken algoritm det
-		 * �r och representerar ungef�r ett l�senord som g�r att
-		 * krypteringen blir s�krare och personlig.
+		 * Textf�ltet som inneh�ller den nyckel som anv�ndare sj�lv matar in.
+		 * Denna nyckel kan variera beroende p� vilken algoritm det �r och
+		 * representerar ungef�r ett l�senord som g�r att krypteringen blir
+		 * s�krare och personlig.
 		 */
 		txtKey = new JTextField();
 		txtKey.setText("Nyckel");
@@ -96,10 +96,10 @@ public class GUI {
 		txtKey.setColumns(10);
 
 		/*
-		 * F�ljande kodblock representerar den dropdown meny d�r anv�ndare
-		 * ska v�lja vilken krypteringsalgoritm som ska v�ljas. Ska typ
-		 * implementeras s� att den bara kallar p� en metod som returnerar
-		 * n�n typ av lista d�r alla algortmer �r representerade.
+		 * F�ljande kodblock representerar den dropdown meny d�r anv�ndare ska
+		 * v�lja vilken krypteringsalgoritm som ska v�ljas. Ska typ
+		 * implementeras s� att den bara kallar p� en metod som returnerar n�n
+		 * typ av lista d�r alla algortmer �r representerade.
 		 */
 		// alternativ p� algoritmer
 		String[] algorithms = { "Caesar", "Playfair", "Kryptmaster", "RSA" };
@@ -111,9 +111,8 @@ public class GUI {
 		// returnerar ett object
 
 		/*
-		 * F�ljande kodblock inneh�ller information om textrutan(v�nster)
-		 * som det �r t�nkt att man ska skriva in text som man vill f�
-		 * krypterad
+		 * F�ljande kodblock inneh�ller information om textrutan(v�nster) som
+		 * det �r t�nkt att man ska skriva in text som man vill f� krypterad
 		 */
 		final JTextArea txtrTextAttKryptera = new JTextArea();
 		txtrTextAttKryptera.setText("Text att kryptera");
@@ -122,8 +121,8 @@ public class GUI {
 		frame.getContentPane().add(txtrTextAttKryptera);
 
 		/*
-		 * F�ljande kodblock inneh�ller information om textrutan(h�ger)
-		 * som anv�ndaren skriver in text som ska bli dekrypterad
+		 * F�ljande kodblock inneh�ller information om textrutan(h�ger) som
+		 * anv�ndaren skriver in text som ska bli dekrypterad
 		 */
 		final JTextArea txtrTextAttDekryptera = new JTextArea();
 		txtrTextAttDekryptera.setText("Text att dekryptera");
@@ -132,24 +131,24 @@ public class GUI {
 		frame.getContentPane().add(txtrTextAttDekryptera);
 
 		/*
-		 * F�ljande kodblock inneh�ller information om knappen "Kryptera",
-		 * den ska anv�ndaren trycka p� n�r den vill kryptera den text som
-		 * den skrivit in i textrutan till v�nster. Den krypterade texten
-		 * kommer att visas i den andra textrutan(h�ger) ala google translate.
-		 * Finns det ingen text i textrutan, ingen algoritm �r vald eller
-		 * ingen nyckel �r vald, ska anv�ndaren uppm�rksammas p� detta.
+		 * F�ljande kodblock inneh�ller information om knappen "Kryptera", den
+		 * ska anv�ndaren trycka p� n�r den vill kryptera den text som den
+		 * skrivit in i textrutan till v�nster. Den krypterade texten kommer att
+		 * visas i den andra textrutan(h�ger) ala google translate. Finns det
+		 * ingen text i textrutan, ingen algoritm �r vald eller ingen nyckel �r
+		 * vald, ska anv�ndaren uppm�rksammas p� detta.
 		 */
 		JButton btnButt = new JButton("Kryptera");
 		btnButt.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//checks all required fields
+				// checks all required fields
 				boolean values = quickCryptionCheck(
 						txtrTextAttKryptera.getText(), txtKey.getText(),
 						algorithmsDropdown.getSelectedItem());
-				//if all info is provided, go forth
+				// if all info is provided, go forth
 				if (values != false) {
-					//easteregg conditions checked
+					// easteregg conditions checked
 					if (easterEggCheck(txtrTextAttDekryptera, txtKey.getText())) {
 						displayInTextArea(txtrTextAttKryptera,
 								par.easteregg(txtrTextAttKryptera.getText()));
@@ -167,22 +166,21 @@ public class GUI {
 
 		/*
 		 * Efterf�ljande kodblock inneh�ller information om knappen
-		 * "dekryptera", den skall tryckas n�r anv�ndaren vill dekryptera
-		 * text som denna skrivit in i den h�gra textrutan. Den dekrypterade
-		 * texten kommer att visas i den v�nstra textrutan likt google
-		 * translate. Finns det ingen text i textrutan, ingen algoritm �r vald
-		 * eller ingen nyckel �r vald, ska anv�ndaren uppm�rksammas p�
-		 * detta.
+		 * "dekryptera", den skall tryckas n�r anv�ndaren vill dekryptera text
+		 * som denna skrivit in i den h�gra textrutan. Den dekrypterade texten
+		 * kommer att visas i den v�nstra textrutan likt google translate. Finns
+		 * det ingen text i textrutan, ingen algoritm �r vald eller ingen nyckel
+		 * �r vald, ska anv�ndaren uppm�rksammas p� detta.
 		 */
 		JButton btnButt_1 = new JButton("Dekryptera");
 		btnButt_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//checks all required fields
+				// checks all required fields
 				boolean values = quickCryptionCheck(
 						txtrTextAttDekryptera.getText(), txtKey.getText(),
 						algorithmsDropdown.getSelectedItem());
-				//if fields provided we can continue
+				// if fields provided we can continue
 				if (values != false) {
 					displayInTextArea(txtrTextAttKryptera, par.parseDecrypt(
 							txtrTextAttDekryptera.getText(), txtKey.getText(),
@@ -204,7 +202,7 @@ public class GUI {
 		btnButt_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//checks all required fields
+				// checks all required fields
 				boolean values = fileCryptionCheck(txtKey.getText(),
 						algorithmsDropdown.getSelectedItem());
 				if (values) {
@@ -222,18 +220,18 @@ public class GUI {
 		frame.getContentPane().add(btnButt_2);
 
 		/*
-		 * Innh�ller information om knappen "dekryptera textfil". N�r den
-		 * trycks skall det kolla om det finns en algoritm samt en nyckel vald,
-		 * sedan skicka vidare till andra delar av programmet.
+		 * Innh�ller information om knappen "dekryptera textfil". N�r den trycks
+		 * skall det kolla om det finns en algoritm samt en nyckel vald, sedan
+		 * skicka vidare till andra delar av programmet.
 		 */
 		JButton btnButt_3 = new JButton("Dekryptera textfil");
 		btnButt_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//checks all required fields
+				// checks all required fields
 				boolean values = fileCryptionCheck(txtKey.getText(),
 						algorithmsDropdown.getSelectedItem());
-				//have to be able to catch because of file manipulation
+				// have to be able to catch because of file manipulation
 				if (values) {
 					try {
 						par.parseDecryptFile(txtKey.getText(),

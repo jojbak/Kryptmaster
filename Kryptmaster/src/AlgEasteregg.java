@@ -4,22 +4,22 @@ import java.util.Map;
 
 /**
  * Fun easter egg where the text is "encrypted" into 1337-5p34k.
+ * 
  * @author rickard & jonathan
  * @version 2015-05-15
  *
  */
-public class AlgEasteregg{
+public class AlgEasteregg {
 
-	HashMap<Character,String> alphabet;
-	HashMap<String,Character> reverse;
-	
-	
+	HashMap<Character, String> alphabet;
+	HashMap<String, Character> reverse;
+
 	public LinkedList<String> encrypt(LinkedList<String> in) {
 		generateAlphabet();
 		LinkedList<String> output = new LinkedList<>();
-		for(String str : in){
+		for (String str : in) {
 			StringBuilder sb = new StringBuilder();
-			for(int i=0; i<str.length();i++){
+			for (int i = 0; i < str.length(); i++) {
 				String converted = alphabet.get(str.charAt(i));
 				sb.append(converted);
 			}
@@ -27,11 +27,12 @@ public class AlgEasteregg{
 		}
 		return output;
 	}
+
 	/**
 	 * Generate the proper values for each letter
 	 */
-	private void generateAlphabet(){
-		alphabet = new HashMap<Character,String>();
+	private void generateAlphabet() {
+		alphabet = new HashMap<Character, String>();
 		alphabet.put('a', "4");
 		alphabet.put('b', "13");
 		alphabet.put('c', "(");
@@ -53,8 +54,8 @@ public class AlgEasteregg{
 		alphabet.put('s', "5");
 		alphabet.put('t', "7");
 		alphabet.put('u', "{_}");
-		alphabet.put('v', "\\\\//"); //"\\//"
-		alphabet.put('w', "\\\\v//"); //"\\v//"
+		alphabet.put('v', "\\\\//"); // "\\//"
+		alphabet.put('w', "\\\\v//"); // "\\v//"
 		alphabet.put('x', "}{");
 		alphabet.put('y', "'//");
 		alphabet.put('z', "2");
@@ -63,32 +64,12 @@ public class AlgEasteregg{
 		alphabet.put('3', "3");
 		alphabet.put('4', "4");
 		alphabet.put('5', "5");
-		alphabet.put('6',"6");
-		alphabet.put('7',"7");
-		alphabet.put('8',"8");
-		alphabet.put('9',"9");
+		alphabet.put('6', "6");
+		alphabet.put('7', "7");
+		alphabet.put('8', "8");
+		alphabet.put('9', "9");
 		alphabet.put('0', "0");
-		
+
 	}
-	
-	/*public static void main(String[] args){
-		generateAlphabet();
-		LinkedList<String> input = new LinkedList<>();
-		input.add("abc");
-		input.add("def");
-		input.add("ghi");
-		input.add("jkl");
-		input.add("mno");
-		input.add("pqr");
-		input.add("stu");
-		input.add("vwx");
-		input.add("yz");
-		
-		LinkedList<String> output = encrypt(input);
-		
-		for(String str : output){
-			System.out.println(str);
-		}
-	}*/
 
 }
